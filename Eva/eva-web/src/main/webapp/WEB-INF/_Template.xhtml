@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='ISO-8859-1' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Eva Application</title>
+    </h:head>
+
+    <h:body>
+        <center>
+            <p:ajaxStatus style="width:200px;position:fixed;right:5px;bottom:40px">
+                <f:facet name="start">  
+                    <p:panel header="Processando...">
+                        <p:graphicImage value="/resources/images/ajax-loader.gif" />  
+                    </p:panel>
+                </f:facet>  
+
+                <f:facet name="complete">  
+                    <h:outputText value="" />  
+                </f:facet>  
+            </p:ajaxStatus>
+        </center>
+
+        <div id="cabecalho">
+            <p:outputLabel value="Bem vindo: #{cachedUser.user.login}" 
+                           style="font-weight: bold; position: relative; left: 1130px; top: 20px; color: white"
+                           rendered="#{not fn:contains(facesContext.viewRoot.viewId, 'login')}"/>
+        </div>
+
+        <div id="conteudo">
+            <h:form>
+                <p:menubar rendered="#{not fn:contains(facesContext.viewRoot.viewId, 'login')}">
+                    <p:submenu label="Projetos">
+                        <p:menuitem value="Gráficos" action="charts"/>
+                    </p:submenu>
+                    <p:submenu label="Financeiro">
+                        <p:submenu label="Documentos">
+                            <p:menuitem value="Receitas"/>
+                            <p:menuitem value="Despesas"/>
+                        </p:submenu>
+                    </p:submenu>
+                    <p:submenu label="Funcionários">
+                        <p:menuitem value="Gerenciamento"/>
+                    </p:submenu>
+                    <p:submenu label="Aplicação">
+                        <p:menuitem value="Trocar Senha" onclick="changePassword.show();"/>
+                        <p:menuitem value="Sair" action="#{loginBean.doLogout()}"/>
+                    </p:submenu>
+                </p:menubar>                
+            </h:form>
+            
+            <ui:insert name="content">Content</ui:insert>
+        </div>
+        
+        <p:dialog widgetVar="changePassword" closable="true" position="center" header="Troca de Senha"
+                  modal="true" resizable="false">
+            <h:form id="formPassword">
+                <p:messages showDetail="false" closable="true"/>
+
+                <p:outputLabel value="Usuário" rendered="#{loginBean.admin}"/>
+                <p:inputText value="#{cachedUser.user.login}" rendered="#{loginBean.admin}"/>
+                
+                <p:outputLabel value="Nova senha"/>
+                <p:password value="#{loginBean.user.password}" 
+                            required="true" requiredMessage="A senha é obrigatória"/>
+
+                <p:commandButton value="Alterar" action="#{loginBean.changePassword()}" update="formPassword"/>
+            </h:form>
+        </p:dialog>
+
+        <div id="rodape">
+            #{templateBean.copyright}
+            Todos os direitos reservados à Nerv TI
+        </div>
+
+    </h:body>
+
+</html>
