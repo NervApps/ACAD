@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                template="./WEB-INF/_Template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:define name="content">
+        <h:form id="form">
+            <p:messages id="msg" closable="true"/>
+            <p:panel toggleable="true" style="border: 0px;" header="Rendimentos">
+                <p:row>
+                    <p:column>
+                        <p:outputLabel value="Cliente: " style="font-weight: bold;"/>
+                        <p:inputText id="inCustomer" value="#{incomesBean.dto.customerName}"
+                                     required="true" requiredMessage="Cliente é obrigatório"/>
+                    </p:column>
+                    <p:column>
+                        <p:outputLabel value="Valor: " style="font-weight: bold;"/>
+                        <p:inputText id="inCurrencyValue" value="#{incomesBean.dto.income}"
+                                     required="true" requiredMessage="Valor é obrigatório">
+                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>  
+                        </p:inputText>
+                    </p:column>
+                </p:row>
+                <p:commandButton update="form:msg :books" value="Cadastrar" action="#{incomesBean.addIncome()}"/>
+            </p:panel>
+        </h:form>
+        <h:form id="books" style="font-size: small;">
+            <p:dataTable value="#{incomesBean.incomeList}" var="income" styleClass=".ui-datatable"
+                         rendered="#{not empty incomesBean.incomeList}">
+                <p:column headerText="Cliente">
+                    <p:outputLabel value="#{income.customerName}"/>
+                </p:column>
+                <p:column headerText="Valor">
+                    <p:outputLabel value="#{income.income}">
+                        <f:convertNumber currencySymbol="R$" type="currency"/>
+                    </p:outputLabel>
+                </p:column>
+                <p:column headerText="Ações">
+                    <p:commandButton icon="ui-icon ui-icon-trash" action="#{incomesBean.remove()}"
+                                     update=":books">
+                        <f:setPropertyActionListener target="#{incomesBean.selected}"
+                                                     value="#{income}"/>
+                    </p:commandButton>
+                </p:column>
+            </p:dataTable>
+        </h:form>
+    </ui:define>
+
+</ui:composition>
