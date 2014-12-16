@@ -11,42 +11,80 @@
         <h:form id="form">
             <p:messages id="msg" closable="true"/>
             <p:panel toggleable="true" style="border: 0px;" header="Rendimentos">
-                <p:row>
-                    <p:column>
-                        <p:outputLabel value="Cliente: " style="font-weight: bold;"/>
-                        <p:inputText id="inCustomer" value="#{incomesBean.dto.customerName}"
-                                     required="true" requiredMessage="Cliente é obrigatório"/>
-                    </p:column>
-                    <p:column>
-                        <p:outputLabel value="Valor: " style="font-weight: bold;"/>
-                        <p:inputText id="inCurrencyValue" value="#{incomesBean.dto.income}"
-                                     required="true" requiredMessage="Valor é obrigatório">
-                            <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>  
-                        </p:inputText>
-                    </p:column>
-                </p:row>
-                <p:commandButton update="form:msg :books" value="Cadastrar" action="#{incomesBean.addIncome()}"/>
+                <h:panelGrid columns="4">
+                    <p:outputLabel value="Nº Documento: " style="font-weight: bold;"/>
+                    <p:inputText id="inNumDoc" value="#{incomesBean.dto.numDocumento}"
+                                 required="true" requiredMessage="Nº Documento é obrigatório"/>
+                    <p:outputLabel value="Nota Fiscal: " style="font-weight: bold;"/>
+                    <p:inputText id="inNota" value="#{incomesBean.dto.notaFiscal}"
+                                 required="true" requiredMessage="Nota Fiscal é obrigatória"/>
+                    <p:outputLabel value="Status: " style="font-weight: bold;"/>
+                    <p:selectOneMenu value="#{incomesBean.dto.status}" converter="beanConverter"
+                                     required="true" requiredMessage="Status é obrigatório">
+                        <f:selectItem itemLabel="-- Selecione --"/>
+                        <f:selectItems value="#{incomesBean.statusList}" var="st"
+                                       itemLabel="#{st.descr}" itemValue="#{st}"/>
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Nome Projeto: " style="font-weight: bold;"/>
+                    <p:inputText id="inNmProject" value="#{incomesBean.dto.nomeProjeto}"
+                                 required="true" requiredMessage="Nome Projeto é obrigatório"/>
+                    <p:outputLabel value="Responsável: " style="font-weight: bold;"/>
+                    <p:inputText id="inResp" value="#{incomesBean.dto.responsavel}"
+                                 required="true" requiredMessage="Responsável é obrigatório"/>
+                    <p:outputLabel value="Descrição: " style="font-weight: bold;"/>
+                    <p:inputTextarea id="inDescr" value="#{incomesBean.dto.descricao}"
+                                     required="true" requiredMessage="Descrição é obrigatória"/>
+                    <p:outputLabel value="Obs: " style="font-weight: bold;"/>
+                    <p:inputTextarea id="inObs" value="#{incomesBean.dto.obs}"/>
+                    <p:outputLabel value="Valor Total: " style="font-weight: bold;"/>
+                    <p:inputText id="inCurrencyValue" value="#{incomesBean.dto.valorTotal}"
+                                 required="true" requiredMessage="Valor é obrigatório">
+                        <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>  
+                    </p:inputText>
+                    <p:outputLabel value="Quantidade de Parcelas: " style="font-weight: bold;"/>
+                    <p:inputText id="inQtde" value="#{incomesBean.dto.qtdeParcelas}"/>
+                </h:panelGrid>
+                <p:commandButton update="form :formItens" icon="ui-icon ui-icon-disk"
+                                 value="Cadastrar" action="#{incomesBean.insert()}"
+                                 oncomplete="PF('confirmItens').show();"/>
+                <p:commandButton type="reset" icon="ui-icon ui-icon-close" value="Limpar"/>
             </p:panel>
         </h:form>
-        <h:form id="books" style="font-size: small;">
-            <p:dataTable value="#{incomesBean.incomeList}" var="income" styleClass=".ui-datatable"
-                         rendered="#{not empty incomesBean.incomeList}">
-                <p:column headerText="Cliente">
-                    <p:outputLabel value="#{income.customerName}"/>
-                </p:column>
-                <p:column headerText="Valor">
-                    <p:outputLabel value="#{income.income}">
-                        <f:convertNumber currencySymbol="R$" type="currency"/>
-                    </p:outputLabel>
-                </p:column>
-                <p:column headerText="Ações">
-                    <p:commandButton icon="ui-icon ui-icon-trash" action="#{incomesBean.remove()}"
-                                     update=":books">
-                        <f:setPropertyActionListener target="#{incomesBean.selected}"
-                                                     value="#{income}"/>
-                    </p:commandButton>
-                </p:column>
-            </p:dataTable>
+
+        <h:form id="formItens">
+            <p:dialog header="Deseja cadastrar essas notas com estes itens?"
+                      widgetVar="confirmItens" modal="true" closable="false"
+                      width="430" showEffect="fadein">
+                <p:dataTable value="#{incomesBean.dto.itens}" var="item" editable="true"
+                             rows="10" paginator="true" paginatorAlwaysVisible="false">
+                    <p:column headerText="Nome">
+                        <p:outputLabel value="#{item.name}"/>
+                    </p:column>
+                    <p:column headerText="Valor">
+                        <p:cellEditor>
+                            <f:facet name="output">
+                                <h:outputText value="#{item.value}">
+                                    <f:convertNumber type="currency"/>
+                                </h:outputText>
+                            </f:facet>
+                            <f:facet name="input">
+                                <p:inputText value="#{item.value}">
+                                    <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>  
+                                </p:inputText>
+                            </f:facet>
+                        </p:cellEditor>
+                    </p:column>
+                    <p:column width="30px;">
+                        <p:rowEditor/>
+                    </p:column>
+                </p:dataTable>
+                <h:panelGrid columns="2">
+                    <p:commandButton value="Confirmar" action="#{incomesBean.confirm()}" 
+                                     oncomplete="PF('confirmItens').hide();"
+                                     update=":form"/>
+                    <p:commandButton value="Cancelar" onclick="PF('confirmItens').hide();"/>
+                </h:panelGrid>
+            </p:dialog>
         </h:form>
     </ui:define>
 

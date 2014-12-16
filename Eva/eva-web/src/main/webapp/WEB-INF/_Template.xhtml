@@ -38,11 +38,11 @@
             <h:form>
                 <p:menubar rendered="#{not fn:contains(facesContext.viewRoot.viewId, 'login')}">
                     <p:submenu label="Projetos">
-                        <p:menuitem value="Gráficos" action="charts"/>
+                        <p:menuitem value="Gráficos" action="charts?faces-redirect=true"/>
                     </p:submenu>
                     <p:submenu label="Financeiro">
                         <p:submenu label="Documentos">
-                            <p:menuitem value="Receitas" action="incomes"/>
+                            <p:menuitem value="Receitas" action="incomes?faces-redirect=true"/>
                             <p:menuitem value="Despesas"/>
                         </p:submenu>
                     </p:submenu>

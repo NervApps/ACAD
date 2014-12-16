@@ -1,11 +1,10 @@
 /* base */
 * { margin:0px; padding:0px; }
+* {font-size: small;}
 body{ 
     font-size:12px; 
     color:#000; 
     font-family:helvetica, arial, sans-serif;
-    padding-bottom: 30px;
-    text-align:center;
 }
 
 /** cabecalho **/
@@ -88,7 +87,7 @@ input, textarea, select {
     margin-bottom: 3px !important;
 }
 textarea {
-    width: 300px;
+    width: 280px;
 }
 input:not(.ui-widget), textarea:not(.ui-widget), select {
     -moz-border-radius:5px 5px 5px 5px;
@@ -181,52 +180,6 @@ form .campos {
     font-size: small;
 }
 
-/* tabela zebrada */
-
-.ui-datatable .ui-datatable-data .even-row td {  
-    background:none repeat scroll 0 0 #DDDDDD;
-    font-size: small;
-}  
-
-.ui-datatable .ui-datatable-data .odd-row td {  
-    background-color: #F0F9FF;
-    font-size: small;
-} 
-
-table.dados{
-    height:auto;
-    margin-bottom: 10px;
-    width:100%;
-}
-
-table.dados tr th{
-    background-color:#0B0F19;
-    color:#fff;
-    color:1em;
-    padding:10px;
-}
-
-table.dados tr td{
-    padding:5px 10px;
-}
-
-.campos tbody tr td {
-    padding-top: 10px;
-    text-align: left;
-}
-
-.dados {
-    width: 100%;	
-}
-
-.par  {
-    background-color: #F0F9FF;
-}
-
-.impar {
-    background:none repeat scroll 0 0 #DDDDDD;
-}
-
 /* validacao */
 .erros {
     margin: 0 0 10px 0;
@@ -244,4 +197,3 @@ table.dados tr td{
     padding: 6px;
     margin: 3px;
 }
-
