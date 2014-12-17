@@ -19,6 +19,7 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.context.RequestContext;
 
 /**
  *
@@ -48,6 +49,8 @@ public class IncomesBean extends ManagedBean implements Serializable {
     
     public void insert() {
         addItens();
+        final RequestContext ctx = RequestContext.getCurrentInstance();
+        ctx.execute("PF('confirmItens').show();");
     }
     
     public void confirm() {

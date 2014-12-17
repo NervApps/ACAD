@@ -14,39 +14,38 @@
                 <h:panelGrid columns="4">
                     <p:outputLabel value="Nº Documento: " style="font-weight: bold;"/>
                     <p:inputText id="inNumDoc" value="#{incomesBean.dto.numDocumento}"
-                                 required="true" requiredMessage="Nº Documento é obrigatório"/>
+                                 required="true" requiredMessage="Nº Documento obrigatório"/>
                     <p:outputLabel value="Nota Fiscal: " style="font-weight: bold;"/>
                     <p:inputText id="inNota" value="#{incomesBean.dto.notaFiscal}"
-                                 required="true" requiredMessage="Nota Fiscal é obrigatória"/>
+                                 required="true" requiredMessage="Nota Fiscal obrigatório"/>
                     <p:outputLabel value="Status: " style="font-weight: bold;"/>
                     <p:selectOneMenu value="#{incomesBean.dto.status}" converter="beanConverter"
-                                     required="true" requiredMessage="Status é obrigatório">
+                                     required="true" requiredMessage="Status obrigatório">
                         <f:selectItem itemLabel="-- Selecione --"/>
                         <f:selectItems value="#{incomesBean.statusList}" var="st"
                                        itemLabel="#{st.descr}" itemValue="#{st}"/>
                     </p:selectOneMenu>
                     <p:outputLabel value="Nome Projeto: " style="font-weight: bold;"/>
                     <p:inputText id="inNmProject" value="#{incomesBean.dto.nomeProjeto}"
-                                 required="true" requiredMessage="Nome Projeto é obrigatório"/>
+                                 required="true" requiredMessage="Nome Projeto obrigatório"/>
                     <p:outputLabel value="Responsável: " style="font-weight: bold;"/>
                     <p:inputText id="inResp" value="#{incomesBean.dto.responsavel}"
-                                 required="true" requiredMessage="Responsável é obrigatório"/>
+                                 required="true" requiredMessage="Responsável obrigatório"/>
                     <p:outputLabel value="Descrição: " style="font-weight: bold;"/>
                     <p:inputTextarea id="inDescr" value="#{incomesBean.dto.descricao}"
-                                     required="true" requiredMessage="Descrição é obrigatória"/>
+                                     required="true" requiredMessage="Descriçao obrigatória"/>
                     <p:outputLabel value="Obs: " style="font-weight: bold;"/>
                     <p:inputTextarea id="inObs" value="#{incomesBean.dto.obs}"/>
                     <p:outputLabel value="Valor Total: " style="font-weight: bold;"/>
                     <p:inputText id="inCurrencyValue" value="#{incomesBean.dto.valorTotal}"
-                                 required="true" requiredMessage="Valor é obrigatório">
+                                 required="true" requiredMessage="Valor obrigatória">
                         <f:convertNumber pattern="#,##0.00" minFractionDigits="2"/>  
                     </p:inputText>
                     <p:outputLabel value="Quantidade de Parcelas: " style="font-weight: bold;"/>
                     <p:inputText id="inQtde" value="#{incomesBean.dto.qtdeParcelas}"/>
                 </h:panelGrid>
                 <p:commandButton update="form :formItens" icon="ui-icon ui-icon-disk"
-                                 value="Cadastrar" action="#{incomesBean.insert()}"
-                                 oncomplete="PF('confirmItens').show();"/>
+                                 value="Cadastrar" action="#{incomesBean.insert()}"/>
                 <p:commandButton type="reset" icon="ui-icon ui-icon-close" value="Limpar"/>
             </p:panel>
         </h:form>
@@ -81,8 +80,8 @@
                 <h:panelGrid columns="2">
                     <p:commandButton value="Confirmar" action="#{incomesBean.confirm()}" 
                                      oncomplete="PF('confirmItens').hide();"
-                                     update=":form"/>
-                    <p:commandButton value="Cancelar" onclick="PF('confirmItens').hide();"/>
+                                     update=":form" icon="ui-icon ui-icon-check"/>
+                    <p:commandButton value="Cancelar" onclick="PF('confirmItens').hide();" icon="ui-icon ui-icon-close"/>
                 </h:panelGrid>
             </p:dialog>
         </h:form>
