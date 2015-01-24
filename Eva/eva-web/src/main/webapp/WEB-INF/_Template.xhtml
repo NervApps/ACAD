@@ -1,90 +1,180 @@
-<?xml version='1.0' encoding='ISO-8859-1' ?> 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:p="http://primefaces.org/ui"
-      xmlns:fn="http://java.sun.com/jsp/jstl/functions"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+<?xml version='1.0' encoding='ISO-8859-1' ?>
+<!DOCTYPE html>
+<html lang="pt_BR"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:jsf="http://xmlns.jcp.org/jsf"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <head jsf:id="head">
+        <title>Eva</title>
+        <meta name="description" content="Eva Imóveis" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta charset="ISO-8859-1"/>
+        <!-- Google Fonts -->
+        <link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'/>
+        <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet" />
+        <link href="resources/css/bootstrap-responsive.min.css" rel="stylesheet" />
+        <link rel="stylesheet" href="resources/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="resources/css/ace.min.css" />
+        <link rel="stylesheet" href="resources/css/ace-responsive.min.css" />
+        <link rel="stylesheet" href="resources/css/ace-skins.min.css" />
+    </head>
+    <body jsf:id="body">
+        <div class="navbar">
+            <div class="navbar-inner">
+                <div class="container-fluid">
+                    <a href="#" class="brand">
+                        <small>
+                            <i class="icon-leaf"></i>
+                            eva
+                        </small>
+                    </a><!--/.brand-->
 
-    <h:head>
-        <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-        <h:outputStylesheet name="./css/cssLayout.css"/>
-        <title>Eva Application</title>
-    </h:head>
+                    <ul class="nav ace-nav pull-right">
+                        <li class="grey">
+                            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                                <i class="icon-tasks"></i>
+                                <span class="badge badge-grey"></span>
+                            </a>
 
-    <h:body>
-        <center>
-            <p:ajaxStatus style="width:200px;position:fixed;right:5px;bottom:40px">
-                <f:facet name="start">  
-                    <p:panel header="Processando...">
-                        <p:graphicImage value="/resources/images/ajax-loader.gif" />  
-                    </p:panel>
-                </f:facet>  
+                            <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
+                                <li class="nav-header">
+                                    <i class="icon-ok"></i>
+                                    Indicadores
+                                </li>
 
-                <f:facet name="complete">  
-                    <h:outputText value="" />  
-                </f:facet>  
-            </p:ajaxStatus>
-        </center>
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">Projetos Atrasados</span>
+                                            <span class="pull-right">4%</span>
+                                        </div>
 
-        <div id="cabecalho">
-            <p:outputLabel value="Bem vindo: #{cachedUser.user.login}" 
-                           style="font-weight: bold; position: relative; left: 1130px; top: 20px; color: white"
-                           rendered="#{not fn:contains(facesContext.viewRoot.viewId, 'login')}"/>
+                                        <div class="progress progress-mini progress-danger">
+                                            <div style="width:42%" class="bar"></div>
+                                        </div>
+                                    </a>
+                                </li>
+
+                                <li>
+                                    <a href="#">
+                                        <div class="clearfix">
+                                            <span class="pull-left">Pendentes Aprovação</span>
+                                            <span class="pull-right">15%</span>
+                                        </div>
+
+                                        <div class="progress progress-mini progress-warning">
+                                            <div style="width:15%" class="bar"></div>
+                                        </div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+
+                        <li class="light-blue">
+                            <a data-toggle="dropdown" href="#" class="dropdown-toggle">
+                                <span class="user-info">
+                                    <small>Bem-vindo,</small>
+                                    Vitor
+                                </span>
+
+                                <i class="icon-caret-down"></i>
+                            </a>
+
+                            <form class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-closer"
+                                  jsf:id="menuForm">
+                                <li>
+                                    <a href="#">
+                                        <i class="icon-cog"></i>
+                                        Configurações
+                                    </a>
+                                </li>
+
+                                <li class="divider"></li>
+
+                                <li>
+                                    <a jsf:action="login?faces-redirect=true">
+                                        <i class="icon-off"></i>
+                                        Sair
+                                    </a>
+                                </li>
+                            </form>
+                        </li>
+                    </ul><!--/.ace-nav-->
+                </div><!--/.container-fluid-->
+            </div><!--/.navbar-inner-->
         </div>
 
-        <div id="conteudo">
-            <h:form>
-                <p:menubar rendered="#{not fn:contains(facesContext.viewRoot.viewId, 'login')}">
-                    <p:submenu label="Projetos">
-                        <p:menuitem value="Gráficos" action="charts?faces-redirect=true"/>
-                    </p:submenu>
-                    <p:submenu label="Financeiro">
-                        <p:submenu label="Documentos">
-                            <p:menuitem value="Receitas" action="incomes?faces-redirect=true"/>
-                            <p:menuitem value="Despesas"/>
-                        </p:submenu>
-                        <p:submenu label="Relatórios">
-                            <p:menuitem value="Contas a pagar"/>
-                            <p:menuitem value="Contas a receber"/>
-                            <p:menuitem value="Despesas por período"/>
-                        </p:submenu>
-                    </p:submenu>
-                    <p:submenu label="Funcionários">
-                        <p:menuitem value="Gerenciamento"/>
-                    </p:submenu>
-                    <p:submenu label="Aplicação">
-                        <p:menuitem value="Trocar Senha" onclick="changePassword.show();"/>
-                        <p:menuitem value="Sair" action="#{loginBean.doLogout()}"/>
-                    </p:submenu>
-                </p:menubar>                
-            </h:form>
-            
-            <ui:insert name="content">Content</ui:insert>
-        </div>
-        
-        <p:dialog widgetVar="changePassword" closable="true" position="center" header="Troca de Senha"
-                  modal="true" resizable="false">
-            <h:form id="formPassword">
-                <p:messages showDetail="false" closable="true"/>
+        <div class="main-container container-fluid">
+            <a class="menu-toggler" id="menu-toggler" href="#">
+                <span class="menu-text"></span>
+            </a>
 
-                <p:outputLabel value="Usuário" rendered="#{loginBean.admin}"/>
-                <p:inputText value="#{cachedUser.user.login}" rendered="#{loginBean.admin}"/>
-                
-                <p:outputLabel value="Nova senha"/>
-                <p:password value="#{loginBean.user.password}" 
-                            required="true" requiredMessage="A senha é obrigatória"/>
+            <div class="sidebar" id="sidebar">
+                <form class="nav nav-list" jsf:id="sidebarForm">
+                    <li>
+                        <a jsf:action="index?faces-redirect=true">
+                            <i class="icon-dollar"></i>
+                            <span class="menu-text"> Financeiro </span>
+                        </a>
+                    </li>
 
-                <p:commandButton value="Alterar" action="#{loginBean.changePassword()}" update="formPassword"/>
-            </h:form>
-        </p:dialog>
+                    <li>
+                        <a jsf:action="index?faces-redirect=true">
+                            <i class="icon-folder-open-alt"></i>
+                            <span class="menu-text"> Projetos </span>
+                        </a>
+                    </li>
 
-        <div id="rodape">
-            #{templateBean.copyright}
-            Todos os direitos reservados à Nerv TI
+                    <li>
+                        <a jsf:action="index?faces-redirect=true">
+                            <i class="icon-user"></i>
+                            <span class="menu-text"> Recursos </span>
+                        </a>
+                    </li>
+                </form><!--/.nav-list-->
+
+                <div class="sidebar-collapse" id="sidebar-collapse">
+                    <i class="icon-double-angle-left"></i>
+                </div>
+            </div>
         </div>
 
-    </h:body>
+        <div class="main-content">
+            <div class="breadcrumbs" id="breadcrumbs">
+                <ul class="breadcrumb">
+                    <li>
+                        <i class="icon-home home-icon"></i>
+                        <a href="#">Home</a>
 
+                        <span class="divider">
+                            <i class="icon-angle-right arrow-icon"></i>
+                        </span>
+                    </li>
+                    <li class="active">Dashboard</li>
+                </ul><!--.breadcrumb-->
+
+                <div class="nav-search" id="nav-search">
+                    <form class="form-search">
+                    <span class="input-icon">
+                        <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <i class="icon-search nav-search-icon"></i>
+                    </span>
+                    </form>
+                </div><!--#nav-search-->
+            </div>
+
+            <div class="page-content">
+                <ui:insert name="content"/>
+            </div>
+        </div>
+
+        <!--basic scripts-->
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="resources/js/bootstrap.min.js"></script>
+        <script src="resources/js/jquery-2.0.3.min.js"></script>
+        <script src="resources/js/jquery.mobile.custom.min.js"></script>
+        <script src="resources/js/ace-elements.min.js"></script>
+        <script src="resources/js/ace.min.js"></script>
+    </body>
 </html>
