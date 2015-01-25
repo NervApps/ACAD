@@ -53,14 +53,16 @@
                                                 <fieldset>
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Usuário" required="true"/>
+                                                            <input type="text" class="span12" placeholder="Usuário" required="true"
+                                                                   jsf:value="#{loginBean.user.login}"/>
                                                             <i class="icon-user"></i>
                                                         </span>
                                                     </label>
 
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Senha" required="true"/>
+                                                            <input type="password" class="span12" placeholder="Senha" required="true"
+                                                                   jsf:value="#{loginBean.user.password}"/>
                                                             <i class="icon-lock"></i>
                                                         </span>
                                                     </label>

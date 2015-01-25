@@ -7,8 +7,8 @@
     <packaging>pom</packaging>
     <modules>
         <module>eva-web</module>
-        <module>eva-connector</module>
         <module>EvaBusiness</module>
+        <module>eva-connector</module>
     </modules>
     
     <properties>

@@ -5,8 +5,9 @@
  */
 package br.com.acae.eva.web.common.beans;
 
+import br.com.acae.eva.connector.LoginService;
+import br.com.acae.eva.connector.exception.BusinessException;
 import com.nerv.eva.core.cached.CachedUser;
-import com.nerv.eva.core.persistence.dao.UserDAO;
 import com.nerv.eva.core.persistence.entity.User;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
@@ -15,7 +16,6 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 import javax.servlet.http.HttpSession;
-import lombok.Getter;
 
 /**
  *
@@ -23,9 +23,9 @@ import lombok.Getter;
  */
 @Named @RequestScoped
 public class LoginBean {    
-    @Getter private User user;
+    private User user;
     @Inject private CachedUser cached;
-    @Inject private UserDAO dao;
+    @Inject private LoginService service;
     
     @PostConstruct
     public void init() {
@@ -33,7 +33,14 @@ public class LoginBean {
     }
     
     public String doLogin() {
-        return "index?faces-redirect=true";
+        try {
+            final User obj = service.getUser(user.getLogin(), user.getPassword());
+            cached.put(obj, true);
+            return "index?faces-redirect=true";
+        } catch (BusinessException e) {
+            System.out.println(e.getWebServiceTranslatedMessage());
+        }
+        return null;
     }
     
     public String doLogout() {
@@ -54,5 +61,9 @@ public class LoginBean {
         final ExternalContext ext = ctx.getExternalContext();
         final HttpSession session = (HttpSession) ext.getSession(false);
         session.invalidate();
+    }
+
+    public User getUser() {
+        return user;
     }
 }

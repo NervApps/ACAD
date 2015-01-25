@@ -12,5 +12,6 @@
     <module>eva-financial</module>
     <module>eva-projects</module>
     <module>eva-human-resources</module>
+    <module>eva-auth</module>
   </modules>
 </project>
