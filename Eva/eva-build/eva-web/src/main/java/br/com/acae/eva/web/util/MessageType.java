@@ -12,8 +12,8 @@ import lombok.Getter;
  * @author Vitor
  */
 public enum MessageType {
-    INFO("alert alert-info", "icon-ok"),
-    WARN("alert alert-warning", ""),
+    INFO ("alert alert-info", "icon-ok"),
+    WARN ("alert alert-warning", ""),
     ERROR("alert alert-error", "icon-remove");
     
     @Getter private final String css;

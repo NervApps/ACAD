@@ -6,20 +6,20 @@
 package br.com.acae.eva.web.context;
 
 import br.com.acae.eva.connector.exception.BusinessException;
+import java.io.Serializable;
+import javax.ejb.Asynchronous;
+import javax.ejb.Singleton;
 import javax.enterprise.event.Observes;
 
 /**
  *
  * @author Vitor
  */
-public class BusinessExceptionHandler {
+@Singleton
+public class BusinessExceptionHandler implements Serializable {
     
-    public void saveLog(@Observes BusinessException e) {
-        System.out.println("Salvando o log");
+    @Asynchronous
+    public void saveLog(@Observes BusinessException e) throws InterruptedException {
+        System.out.println("Salvando o log: " + e.getWebServiceTranslatedMessage());
     }
-    
-    public void showError(@Observes BusinessException e) {
-        System.out.println("Salvando o log");
-    }
-    
 }

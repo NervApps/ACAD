@@ -16,6 +16,6 @@ import org.apache.deltaspike.core.api.message.MessageTemplate;
 public interface RestHosts {
     
     @MessageTemplate("http://localhost:8080/eva-auth/rest/login")
-    String auth();
+    String login();
     
 }

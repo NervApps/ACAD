@@ -32,6 +32,16 @@
                                         <span class="red">eva</span>
                                     </h1>
                                     <h4 class="blue">Academia da Estratégia</h4>
+                                    <div class="#{flash.message.type.css}}">
+                                        <button type="button" class="close" data-dismiss="alert">
+                                            <i class="icon-remove"></i>
+                                        </button>
+                                        <strong>
+                                            <i class="#{flash.message.type.icon}}"></i>
+                                            #{flash.message.title}
+                                        </strong>
+                                            #{flash.message.detail} <br/>
+                                    </div>
                                 </div>
                             </div>
 
@@ -224,7 +234,7 @@
         </div><!--/.main-container-->
 
         <!--basic scripts-->
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+        <script src="resources/js/jquery-2.0.3.min.js"></script>
         <script src="resources/js/bootstrap.min.js"></script>
         <script src="resources/js/jquery-2.0.3.min.js"></script>
         <script src="resources/js/jquery.mobile.custom.min.js"></script>

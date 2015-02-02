@@ -13,8 +13,6 @@ import br.com.acae.eva.model.User;
 import java.util.HashMap;
 import java.util.Map;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 
@@ -28,12 +26,12 @@ public class LoginService {
     @Inject private RestHosts host;
     @Inject @Json private RestClient rest;
     
-    public User getUser(final String login, final String password) {
+    public User getUser(final String login, final String password) throws BusinessException {
         final Map<String, String> params = new HashMap<>();
         params.put("login", login);
         params.put("password", password);
         
-        final String endpoint = host.auth().concat("doLogin");
+        final String endpoint = host.login().concat("doLogin");
         
         try {
             return rest.get(endpoint, params, User.class);    
@@ -42,7 +40,7 @@ public class LoginService {
         }
     }
     
-    public boolean exists(final String user, final String password) {
+    public boolean exists(final String user, final String password) throws BusinessException {
         return getUser(user, password) != null;
     }
 }

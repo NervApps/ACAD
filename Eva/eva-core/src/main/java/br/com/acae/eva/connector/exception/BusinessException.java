@@ -5,29 +5,29 @@
  */
 package br.com.acae.eva.connector.exception;
 
+import java.util.ResourceBundle;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.core.Response.Status;
 
 
 /**
  *
  * @author Vitor
  */
-public class BusinessException extends RuntimeException {
+public class BusinessException extends Exception {
+    
+    private static final String HTTP_CODES = "br.com.acae.eva.messages.http-codes.properties";
+    private final ResourceBundle bundle;
 
     public BusinessException(WebApplicationException cause) {
         super(cause);
+        bundle = ResourceBundle.getBundle(HTTP_CODES);
     }
     
     public String getWebServiceTranslatedMessage() {
         final WebApplicationException ex = (WebApplicationException) getCause();
         final Response resp = ex.getResponse();
         
-        if (Status.NOT_FOUND.getStatusCode() == resp.getStatus()) {
-            return "Não encontrado";
-        } else {
-            return "Erro interno no servidor. Contate o adminstrador";
-        }
+        return bundle.getString(String.valueOf(resp.getStatus()));
     }
 }
