@@ -5,15 +5,15 @@
  */
 package br.com.acae.eva.web.beans.common;
 
-import br.com.acae.eva.connector.exception.BusinessException;
-import br.com.acae.eva.connector.service.LoginService;
+import br.com.acae.eva.connector.RestClient;
+import br.com.acae.eva.connector.qualifier.Json;
+import br.com.acae.eva.connector.hosts.RestHosts;
 import br.com.acae.eva.model.User;
-import br.com.acae.eva.web.beans.util.Controller;
 import br.com.acae.eva.web.context.UserLogged;
+import java.util.HashMap;
+import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.RequestScoped;
-import javax.enterprise.event.Event;
-import javax.enterprise.inject.Any;
 import javax.inject.Inject;
 import javax.inject.Named;
 import lombok.Getter;
@@ -24,12 +24,13 @@ import lombok.Setter;
  * @author Vitor Ribeiro de Oliveira
  */
 @Named @RequestScoped
-public class LoginBean extends Controller {    
+public class LoginBean {    
     
     @Getter @Setter private String login;
     @Getter @Setter private String password;
-    @Inject private LoginService service;
     @Inject private UserLogged logged;
+    @Inject private RestHosts host;
+    @Inject @Json private RestClient rest;
     
     @PostConstruct
     public void init() {
@@ -38,12 +39,12 @@ public class LoginBean extends Controller {
     }
     
     public String doLogin() {
-        try {
-            final User obj = service.getUser(login, password);
-            logged.login(obj);
-        } catch (BusinessException e) {
-            showMessage(e);
-        }
+        final Map<String, String> params = new HashMap<>();
+        params.put("login", login);
+        params.put("password", password);
+
+        final User obj = rest.get(host.login(), params, User.class);
+        logged.login(obj);
         
         return "index?faces-redirect=true";
     }

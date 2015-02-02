@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.acae.eva.connector.service.hosts;
+package br.com.acae.eva.connector.hosts;
 
 import org.apache.deltaspike.core.api.message.MessageBundle;
 import org.apache.deltaspike.core.api.message.MessageTemplate;
@@ -15,7 +15,9 @@ import org.apache.deltaspike.core.api.message.MessageTemplate;
 @MessageBundle
 public interface RestHosts {
     
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login")
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/doLogin")
     String login();
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/create")
+    String newUser();
     
 }

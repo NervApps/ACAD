@@ -10,6 +10,7 @@ import br.com.acae.eva.model.User;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
@@ -38,6 +39,19 @@ public class Login {
                 return loaded;
             else
                 throw new WebApplicationException(Response.Status.NOT_FOUND);
+        } catch (Exception e) {
+            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @POST @Path("/create")
+    public User create(User user) {
+        try {
+            if (doLogin(user.getLogin(), user.getPassword()) == null) {
+                return dao.save(user);
+            } else {
+                throw new WebApplicationException(Response.Status.CONFLICT);
+            }
         } catch (Exception e) {
             throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
         }
