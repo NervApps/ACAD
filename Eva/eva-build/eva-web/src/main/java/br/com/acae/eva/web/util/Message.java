@@ -5,6 +5,9 @@
  */
 package br.com.acae.eva.web.util;
 
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -27,5 +30,16 @@ public final class Message {
         this.type = type;
         this.title = title;
         this.detail = detail;
+    }
+    
+    public void show() {
+        final ExternalContext ext = getExternalContext();
+        final Flash flash = ext.getFlash();
+        flash.put("message", this);
+    }
+    
+    private ExternalContext getExternalContext() {
+        final FacesContext ctx = FacesContext.getCurrentInstance();
+        return ctx.getExternalContext();
     }
 }

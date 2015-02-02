@@ -24,10 +24,12 @@ import lombok.Setter;
  * @author Vitor Ribeiro de Oliveira
  */
 @Named @RequestScoped
-public class LoginBean {    
+public class LoginBean extends ManagedBean {    
     
     @Getter @Setter private String login;
     @Getter @Setter private String password;
+    @Getter @Setter private String email;
+    @Getter @Setter private String password2;
     @Inject private UserLogged logged;
     @Inject private RestHosts host;
     @Inject @Json private RestClient rest;
@@ -47,6 +49,19 @@ public class LoginBean {
         logged.login(obj);
         
         return "index?faces-redirect=true";
+    }
+    
+    public void create() {
+        User user = new User();
+        user.setLogin(login);
+        user.setPassword(password);
+        user.setEmail(email);
+        
+        final User created = rest.post(host.newUser(), user);
+        if (created != null)
+            infoMessage("Usuário ciado com sucesso");
+        else
+            errorMessage("Erro ao criar usuário", "Contate o administrador");
     }
     
     public String doLogout() {

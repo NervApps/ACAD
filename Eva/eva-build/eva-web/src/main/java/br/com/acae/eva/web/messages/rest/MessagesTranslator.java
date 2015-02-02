@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.acae.eva.web.messages;
+package br.com.acae.eva.web.messages.rest;
 
 import java.io.Serializable;
 import java.util.ResourceBundle;

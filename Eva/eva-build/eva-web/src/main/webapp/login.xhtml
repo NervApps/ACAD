@@ -32,12 +32,12 @@
                                         <span class="red">eva</span>
                                     </h1>
                                     <h4 class="blue">Academia da Estratégia</h4>
-                                    <div class="#{flash.message.type.css}}">
+                                    <div class="#{flash.message.type.css}">
                                         <button type="button" class="close" data-dismiss="alert">
                                             <i class="icon-remove"></i>
                                         </button>
                                         <strong>
-                                            <i class="#{flash.message.type.icon}}"></i>
+                                            <i class="#{flash.message.type.icon}"></i>
                                             #{flash.message.title}
                                         </strong>
                                             #{flash.message.detail} <br/>
@@ -169,32 +169,38 @@
                                                 <div class="space-6"></div>
                                                 <p> Preencha suas informações: </p>
 
-                                                <form>
+                                                <form jsf:id="form1">
                                                 <fieldset>
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="email" class="span12" placeholder="Email" />
+                                                            <input type="email" class="span12" placeholder="Email" 
+                                                                   jsf:value="#{loginBean.email}"/>
                                                             <i class="icon-envelope"></i>
                                                         </span>
                                                     </label>
 
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="text" class="span12" placeholder="Usuário" />
+                                                            <input type="text" class="span12" placeholder="Usuário" 
+                                                                   jsf:value="#{loginBean.login}"/>
                                                             <i class="icon-user"></i>
                                                         </span>
                                                     </label>
 
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Senha" />
+                                                            <input type="password" class="span12" placeholder="Senha" 
+                                                                   jsf:value="#{loginBean.password}" required="true"
+                                                                   jsf:validator="#{samePwdValidator.validateSource}"/>
                                                             <i class="icon-lock"></i>
                                                         </span>
                                                     </label>
 
                                                     <label>
                                                         <span class="block input-icon input-icon-right">
-                                                            <input type="password" class="span12" placeholder="Repita a senha" />
+                                                            <input type="password" class="span12" placeholder="Repita a senha"
+                                                                   jsf:value="#{loginBean.password2}" required="true"
+                                                                   jsf:validator="#{samePwdValidator.validateTarget}"/>
                                                             <i class="icon-retweet"></i>
                                                         </span>
                                                     </label>
@@ -207,7 +213,7 @@
                                                             Limpar
                                                         </button>
 
-                                                        <button onclick="return false;" class="width-65 pull-right btn btn-small btn-success">
+                                                        <button class="width-65 pull-right btn btn-small btn-success">
                                                             Registrar
                                                             <i class="icon-arrow-right icon-on-right"></i>
                                                         </button>

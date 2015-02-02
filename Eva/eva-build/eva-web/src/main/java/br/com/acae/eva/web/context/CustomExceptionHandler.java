@@ -5,19 +5,13 @@
  */
 package br.com.acae.eva.web.context;
 
-import br.com.acae.eva.web.messages.MessagesTranslator;
-import br.com.acae.eva.web.util.Message;
-import br.com.acae.eva.web.util.MessageType;
+import br.com.acae.eva.web.context.handler.ExceptionDispatcher;
 import java.util.Iterator;
 import javax.faces.FacesException;
 import javax.faces.context.ExceptionHandler;
 import javax.faces.context.ExceptionHandlerWrapper;
-import javax.faces.context.ExternalContext;
-import javax.faces.context.FacesContext;
-import javax.faces.context.Flash;
 import javax.faces.event.ExceptionQueuedEvent;
 import javax.faces.event.ExceptionQueuedEventContext;
-import javax.ws.rs.WebApplicationException;
 import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 /**
@@ -44,36 +38,17 @@ public class CustomExceptionHandler extends ExceptionHandlerWrapper {
             final ExceptionQueuedEventContext context =
                     (ExceptionQueuedEventContext) event.getSource();
  
-            final FacesException t = (FacesException) context.getException();
+            final Throwable ex = context.getException();
             
             try {
-                Throwable cause = t.getCause();
-                while (cause != null && !(cause instanceof WebApplicationException)) {
-                    cause = cause.getCause();
-                }
+                final ExceptionDispatcher dispatcher = 
+                        BeanProvider.getContextualReference(ExceptionDispatcher.class);
                 
-                if (cause != null) {
-                    final WebApplicationException ex = (WebApplicationException) cause;
-                    putMessage(ex);
-                }
+                dispatcher.getEvent().fire(ex);
             } finally {
                 i.remove();
             }
         }
         getWrapped().handle();
-    }
-    
-    private void putMessage(final WebApplicationException ex) {
-        final MessagesTranslator msg = BeanProvider.getContextualReference(MessagesTranslator.class);
-        final Message message = new Message(MessageType.ERROR, msg.translate(ex));
-        
-        final ExternalContext ext = getExternalContext();
-        final Flash flash = ext.getFlash();
-        flash.put("message", message);
-    }
-    
-    private ExternalContext getExternalContext() {
-        final FacesContext ctx = FacesContext.getCurrentInstance();
-        return ctx.getExternalContext();
     }
 }
