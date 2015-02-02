@@ -9,6 +9,7 @@ import br.com.acae.eva.auth.dao.UserDAO;
 import br.com.acae.eva.model.User;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -45,9 +46,11 @@ public class Login {
     }
     
     @POST @Path("/create")
+    @Consumes(MediaType.APPLICATION_JSON)
     public User create(User user) {
         try {
-            if (doLogin(user.getLogin(), user.getPassword()) == null) {
+            final User loaded = dao.findByLoginEqualAndPasswordEqual(user.getLogin(), user.getPassword());
+            if (loaded == null) {
                 return dao.save(user);
             } else {
                 throw new WebApplicationException(Response.Status.CONFLICT);

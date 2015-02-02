@@ -69,7 +69,7 @@ public abstract class RestClient {
     
     public <T> T post(final String url, final Object param) 
             throws WebApplicationException {
-        return (T) target(url).post(Entity.entity(param, getType()));
+        return (T) target(url).post(Entity.entity(param, getType()), param.getClass());
     }
     
     public <T> T post(final String url, final Object param, 
