@@ -9,6 +9,7 @@ import br.com.acae.eva.connector.RestClient;
 import br.com.acae.eva.connector.qualifier.Json;
 import br.com.acae.eva.connector.hosts.RestHosts;
 import br.com.acae.eva.model.User;
+import br.com.acae.eva.util.Hasher;
 import br.com.acae.eva.web.context.UserLogged;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,9 +31,11 @@ public class LoginBean extends ManagedBean {
     @Getter @Setter private String password;
     @Getter @Setter private String email;
     @Getter @Setter private String password2;
+    
     @Inject private UserLogged logged;
     @Inject private RestHosts host;
     @Inject @Json private RestClient rest;
+    @Inject private Hasher hasher;
     
     @PostConstruct
     public void init() {
@@ -43,7 +46,7 @@ public class LoginBean extends ManagedBean {
     public String doLogin() {
         final Map<String, String> params = new HashMap<>();
         params.put("login", login);
-        params.put("password", password);
+        params.put("password", hasher.sha1Hash(password));
 
         final User obj = rest.get(host.login(), params, User.class);
         logged.login(obj);
@@ -54,14 +57,14 @@ public class LoginBean extends ManagedBean {
     public void create() {
         User user = new User();
         user.setLogin(login);
-        user.setPassword(password);
+        user.setPassword(hasher.sha1Hash(password));
         user.setEmail(email);
         
         final User created = rest.post(host.newUser(), user);
         if (created != null)
-            infoMessage("Usuário ciado com sucesso");
+            info("Usuário criado com sucesso");
         else
-            errorMessage("Erro ao criar usuário", "Contate o administrador");
+            error("Erro ao criar usuário", "Contate o administrador");
     }
     
     public String doLogout() {
