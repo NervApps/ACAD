@@ -44,7 +44,7 @@ public class TaskService {
     @GET @Path("/run")
     public Response run(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
         try {
-            putInSession(user);
+            putInContext(user);
             final TaskInstance instance = loadTask(taskId);
             executor.run(instance);
             return Response.ok().build();
@@ -56,7 +56,7 @@ public class TaskService {
     @GET @Path("/execute")
     public Response execute(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
         try {
-            putInSession(user);
+            putInContext(user);
             final TaskInstance instance = loadTask(taskId);
             executor.execute(instance);
             return Response.ok().build();
@@ -75,20 +75,20 @@ public class TaskService {
             return find;
     }
     
-    private void putInSession(final String userName) {
-        User get;
+    private void putInContext(final String userName) {
+        User user;
         if (userName == null || userName.isEmpty()) {
-            get = client.get(host.systemUser(), User.class);
+            user = client.get(host.systemUser(), User.class);
         } else {
             final Map<String, String> params = new HashMap<>();
             params.put("user", userName);
 
-            get = client.get(host.getUser(), params, User.class);
-            if (get == null) {
+            user = client.get(host.getUser(), params, User.class);
+            if (user == null) {
                 throw new WebApplicationException(Response.Status.NOT_FOUND);
             }
         }
         
-        active.setUser(get);
+        active.setUser(user);
     }
 }
