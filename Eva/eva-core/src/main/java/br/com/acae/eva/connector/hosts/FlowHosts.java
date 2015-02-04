@@ -13,11 +13,10 @@ import org.apache.deltaspike.core.api.message.MessageTemplate;
  * @author Vitor
  */
 @MessageBundle
-public interface RestHosts {
+public interface FlowHosts {
     
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/doLogin")
-    String login();
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/create")
-    String newUser();
-    
+    @MessageTemplate("http://localhost:8080/eva-flow/rest/task/run")
+    String runTask();
+    @MessageTemplate("http://localhost:8080/eva-flow/rest/task/execute")
+    String executeTask();
 }

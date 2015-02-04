@@ -7,6 +7,8 @@ package br.com.acae.eva.connector;
 
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -22,6 +24,7 @@ import javax.ws.rs.core.Response;
  * @author Vitor
  */
 public abstract class RestClient {
+    protected static final Logger logger = Logger.getLogger("RestClient");
     private final Client client;
 
     public RestClient() {
@@ -89,6 +92,7 @@ public abstract class RestClient {
             sb.append(entry.getKey()).append("=").append(entry.getValue());
         }
         
+        logger.log(Level.INFO, "Access URL: {0}", sb.toString());
         return sb.toString();
     }
     

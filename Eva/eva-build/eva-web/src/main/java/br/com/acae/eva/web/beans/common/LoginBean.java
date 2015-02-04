@@ -7,7 +7,8 @@ package br.com.acae.eva.web.beans.common;
 
 import br.com.acae.eva.connector.RestClient;
 import br.com.acae.eva.connector.qualifier.Json;
-import br.com.acae.eva.connector.hosts.RestHosts;
+import br.com.acae.eva.connector.hosts.AuthHosts;
+import br.com.acae.eva.connector.hosts.FlowHosts;
 import br.com.acae.eva.model.User;
 import br.com.acae.eva.util.Hasher;
 import br.com.acae.eva.web.context.UserLogged;
@@ -33,7 +34,8 @@ public class LoginBean extends ManagedBean {
     @Getter @Setter private String password2;
     
     @Inject private UserLogged logged;
-    @Inject private RestHosts host;
+    @Inject private AuthHosts authHost;
+    @Inject private FlowHosts flowHost;
     @Inject @Json private RestClient rest;
     @Inject private Hasher hasher;
     
@@ -45,23 +47,22 @@ public class LoginBean extends ManagedBean {
     
     public String doLogin() {
         final Map<String, String> params = new HashMap<>();
-        params.put("login", login);
-        params.put("password", hasher.sha1Hash(password));
+        params.put("user", login);
+        params.put("taskId", hasher.sha1Hash(password));
 
-        final User obj = rest.get(host.login(), params, User.class);
+        final User obj = rest.get(flowHost.runTask(), params, User.class);
         logged.login(obj);
         
         return "index?faces-redirect=true";
     }
     
     public void create() {
-        User user = new User();
+        final User user = new User();
         user.setLogin(login);
         user.setPassword(hasher.sha1Hash(password));
         user.setEmail(email);
         
-        final User created = rest.post(host.newUser(), user);
-        if (created != null)
+        if (rest.post(authHost.newUser(), user) != null)
             info("Usuário criado com sucesso");
         else
             error("Erro ao criar usuário", "Contate o administrador");

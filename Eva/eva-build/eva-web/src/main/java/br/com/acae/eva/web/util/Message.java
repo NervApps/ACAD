@@ -33,13 +33,9 @@ public final class Message {
     }
     
     public void show() {
-        final ExternalContext ext = getExternalContext();
+        final FacesContext ctx = FacesContext.getCurrentInstance();
+        final ExternalContext ext = ctx.getExternalContext();
         final Flash flash = ext.getFlash();
         flash.put("message", this);
-    }
-    
-    private ExternalContext getExternalContext() {
-        final FacesContext ctx = FacesContext.getCurrentInstance();
-        return ctx.getExternalContext();
     }
 }

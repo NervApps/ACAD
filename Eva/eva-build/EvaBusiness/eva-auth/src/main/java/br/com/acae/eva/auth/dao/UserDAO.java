@@ -19,4 +19,6 @@ public interface UserDAO extends EntityRepository<User, Long> {
     
     @Transactional
     User findByLoginEqualAndPasswordEqual(final String login, final String password);
+    @Transactional
+    User findBy(final String login);
 }

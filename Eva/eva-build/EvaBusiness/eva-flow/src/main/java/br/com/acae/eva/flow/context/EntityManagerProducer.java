@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.acae.eva.auth.context;
+package br.com.acae.eva.flow.context;
 
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.inject.Disposes;

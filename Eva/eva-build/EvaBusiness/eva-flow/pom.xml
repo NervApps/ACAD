@@ -8,9 +8,10 @@
   </parent>
 
     <groupId>br.com.acae</groupId>
-    <artifactId>eva-auth</artifactId>
+    <artifactId>eva-flow</artifactId>
     <version>1.0</version>
     <packaging>war</packaging>
 
-    <name>eva-auth</name>
+    <name>eva-flow</name>
+
 </project>

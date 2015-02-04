@@ -21,8 +21,7 @@ import org.apache.deltaspike.jsf.api.listener.phase.JsfPhaseId;
 public class UserLoggedListener {
     @Inject private UserLogged logged;
     
-    public void onPhaseEnd(@Observes 
-                           @AfterPhase(JsfPhaseId.RESTORE_VIEW) PhaseEvent event) {
+    public void listen(@Observes @AfterPhase(JsfPhaseId.RESTORE_VIEW) PhaseEvent event) {
         final FacesContext ctx = FacesContext.getCurrentInstance();
         final String page = getPage(ctx);
         

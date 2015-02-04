@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.acae.eva.auth;
+package br.com.acae.eva.auth.rest;
 
 import br.com.acae.eva.auth.dao.UserDAO;
 import br.com.acae.eva.model.User;
@@ -36,6 +36,19 @@ public class Login {
         
         try {
             final User loaded = dao.findByLoginEqualAndPasswordEqual(user, password);
+            if (loaded != null)
+                return loaded;
+            else
+                throw new WebApplicationException(Response.Status.NOT_FOUND);
+        } catch (Exception e) {
+            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GET @Path("/getUser")
+    public User getUser(@QueryParam("user") String user) {
+        try {
+            final User loaded = dao.findBy(user);
             if (loaded != null)
                 return loaded;
             else
