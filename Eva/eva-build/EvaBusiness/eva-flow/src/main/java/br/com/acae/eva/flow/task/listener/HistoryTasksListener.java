@@ -6,7 +6,6 @@
 package br.com.acae.eva.flow.task.listener;
 
 import br.com.acae.eva.connector.hosts.AuthHosts;
-import br.com.acae.eva.flow.context.ActiveUser;
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
 import br.com.acae.eva.flow.qualifier.History;
 import br.com.acae.eva.model.TaskInstance;
@@ -28,7 +27,7 @@ public class HistoryTasksListener {
     
     @Asynchronous
     @Transactional
-    public void keepHistory(@Observes @History TaskInstance instance, ActiveUser active) {
+    public void keepHistory(@Observes @History TaskInstance instance) {
         final TaskInstance find = taskDAO.findBy(instance.getId());
     }
 }

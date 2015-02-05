@@ -15,6 +15,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -43,4 +44,7 @@ public class TaskInstance implements Serializable {
     @ManyToOne
     @JoinColumn(name = "PROCESS_INSTANCE_ID", referencedColumnName = "PROCESS_INSTANCE_ID")
     @Getter @Setter private ProcessInstance process;
+    
+    @Transient
+    @Getter @Setter private User executedBy;
 }

@@ -8,7 +8,6 @@ package br.com.acae.eva.flow.rest;
 import br.com.acae.eva.connector.RestClient;
 import br.com.acae.eva.connector.hosts.AuthHosts;
 import br.com.acae.eva.connector.qualifier.Json;
-import br.com.acae.eva.flow.context.ActiveUser;
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
 import br.com.acae.eva.flow.task.listener.TaskExecutorDispatcher;
 import br.com.acae.eva.model.TaskInstance;
@@ -39,14 +38,12 @@ public class TaskService {
     @Inject private TaskInstanceDAO instanceDAO;
     @Inject private TaskExecutorDispatcher executor;
     @Inject @Json private RestClient client;
-    @Inject private ActiveUser active;
     
     @GET @Path("/run")
     public Response run(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
         try {
-            putInContext(user);
             final TaskInstance instance = loadTask(taskId);
-            executor.run(instance);
+            executor.run(instance, loadUser(user));
             return Response.ok().build();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
@@ -56,9 +53,8 @@ public class TaskService {
     @GET @Path("/execute")
     public Response execute(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
         try {
-            putInContext(user);
             final TaskInstance instance = loadTask(taskId);
-            executor.execute(instance);
+            executor.execute(instance, loadUser(user));
             return Response.ok().build();
         } catch (Exception e) {
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
@@ -75,7 +71,7 @@ public class TaskService {
             return find;
     }
     
-    private void putInContext(final String userName) {
+    private User loadUser(final String userName) {
         User user;
         if (userName == null || userName.isEmpty()) {
             user = client.get(host.systemUser(), User.class);
@@ -89,6 +85,6 @@ public class TaskService {
             }
         }
         
-        active.setUser(user);
+        return user;
     }
 }
