@@ -29,21 +29,20 @@ public class TaskExecutorDispatcher {
     private static final Logger logger = Logger.getLogger("TaskExecutorDispatcher");
     @Inject private Event<TaskInstance> event;
     
-    public void run(final TaskInstance task, final User user) {
-        dispatch(task, user, new AnnotationLiteral<Start>() {});
+    public void run(final TaskInstance task) {
+        dispatch(task, new AnnotationLiteral<Start>() {});
     }
     
-    public void execute(final TaskInstance task, final User user) {
-        dispatch(task, user, new AnnotationLiteral<Doing>() {});
+    public void execute(final TaskInstance task) {
+        dispatch(task, new AnnotationLiteral<Doing>() {});
     }
     
-    private void dispatch(final TaskInstance task, final User user, final Annotation method) {
+    private void dispatch(final TaskInstance task, final Annotation method) {
         final TaskDef def = task.getTaskDef();
         final TaskNames t = TaskNames.getByTaskDef(def);
-        if (t != null) {
-            task.setExecutedBy(user);
+        if (t != null)
             event.select(method).select(t.getQualifier()).fire(task);
-        } else
+        else
             logger.log(Level.WARNING, "Class for task: {0} not found", def.getName());
     }
 }

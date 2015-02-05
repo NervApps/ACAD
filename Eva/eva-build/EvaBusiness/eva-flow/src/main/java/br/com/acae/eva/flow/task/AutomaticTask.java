@@ -26,7 +26,7 @@ public abstract class AutomaticTask implements Task {
     @Inject protected TaskInstanceDAO instanceDAO;
     @Inject protected TaskOrderDAO orderDAO;
     @Inject @NextTask protected Event<TaskInstance> nextTasks;
-    @Inject @KeepHistory  protected Event<TaskInstance> keepHistory;
+    @Inject @KeepHistory protected Event<TaskInstance> keepHistory;
 
     @Override
     @Transactional

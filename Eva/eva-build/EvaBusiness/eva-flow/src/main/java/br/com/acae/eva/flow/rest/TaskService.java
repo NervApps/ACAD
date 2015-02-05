@@ -8,6 +8,7 @@ package br.com.acae.eva.flow.rest;
 import br.com.acae.eva.connector.RestClient;
 import br.com.acae.eva.connector.hosts.AuthHosts;
 import br.com.acae.eva.connector.qualifier.Json;
+import br.com.acae.eva.exception.StackTrace;
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
 import br.com.acae.eva.flow.task.listener.TaskExecutorDispatcher;
 import br.com.acae.eva.model.TaskInstance;
@@ -15,6 +16,7 @@ import br.com.acae.eva.model.User;
 import java.util.HashMap;
 import java.util.Map;
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.event.Event;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -38,14 +40,17 @@ public class TaskService {
     @Inject private TaskInstanceDAO instanceDAO;
     @Inject private TaskExecutorDispatcher executor;
     @Inject @Json private RestClient client;
+    @Inject @StackTrace(printStackTrace = true) private Event<Exception> event;
     
     @GET @Path("/run")
     public Response run(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
         try {
             final TaskInstance instance = loadTask(taskId);
-            executor.run(instance, loadUser(user));
+            instance.setExecutedBy(loadUser(user));
+            executor.run(instance);
             return Response.ok().build();
         } catch (Exception e) {
+            event.fire(e);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }
@@ -54,9 +59,11 @@ public class TaskService {
     public Response execute(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
         try {
             final TaskInstance instance = loadTask(taskId);
-            executor.execute(instance, loadUser(user));
+            instance.setExecutedBy(loadUser(user));
+            executor.execute(instance);
             return Response.ok().build();
         } catch (Exception e) {
+            event.fire(e);
             throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
         }
     }

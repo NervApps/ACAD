@@ -24,6 +24,7 @@ public class NextTaskListener {
     
     @Inject private TaskOrderDAO orderDAO;
     @Inject private TaskInstanceDAO instanceDAO;
+    @Inject private TaskExecutorDispatcher dispatcher;
     
     @Transactional
     public void executeNextTaks(@Observes @NextTask TaskInstance instance) {
@@ -32,9 +33,8 @@ public class NextTaskListener {
             final ProcessInstance process = instance.getProcess();
             final List<TaskDef> pending = instanceDAO.getPendingInProcess(nexts, process);
             if (!pending.isEmpty()) {
-                //TODO: chamar o método run da classe da tarefa
+                dispatcher.run(instance);
             }
         }
     }
-    
 }
