@@ -7,7 +7,7 @@ package br.com.acae.eva.flow.task;
 
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
 import br.com.acae.eva.flow.dao.TaskOrderDAO;
-import br.com.acae.eva.flow.qualifier.History;
+import br.com.acae.eva.flow.qualifier.KeepHistory;
 import br.com.acae.eva.flow.qualifier.NextTask;
 import br.com.acae.eva.model.TaskDef;
 import br.com.acae.eva.model.TaskInstance;
@@ -26,7 +26,7 @@ public abstract class AutomaticTask implements Task {
     @Inject protected TaskInstanceDAO instanceDAO;
     @Inject protected TaskOrderDAO orderDAO;
     @Inject @NextTask protected Event<TaskInstance> nextTasks;
-    @Inject @History  protected Event<TaskInstance> keepHistory;
+    @Inject @KeepHistory  protected Event<TaskInstance> keepHistory;
 
     @Override
     @Transactional

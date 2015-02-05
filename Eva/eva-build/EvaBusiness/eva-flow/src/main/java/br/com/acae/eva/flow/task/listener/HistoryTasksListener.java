@@ -6,9 +6,13 @@
 package br.com.acae.eva.flow.task.listener;
 
 import br.com.acae.eva.connector.hosts.AuthHosts;
+import br.com.acae.eva.flow.dao.HistoryDAO;
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
-import br.com.acae.eva.flow.qualifier.History;
+import br.com.acae.eva.flow.qualifier.KeepHistory;
+import br.com.acae.eva.model.History;
 import br.com.acae.eva.model.TaskInstance;
+import br.com.acae.eva.model.enums.HistoryObjectType;
+import java.util.Date;
 import javax.ejb.Asynchronous;
 import javax.ejb.Stateless;
 import javax.enterprise.event.Observes;
@@ -23,11 +27,20 @@ import org.apache.deltaspike.jpa.api.transaction.Transactional;
 public class HistoryTasksListener {
     
     @Inject private TaskInstanceDAO taskDAO;
+    @Inject private HistoryDAO historyDAO;
     @Inject private AuthHosts hosts;
     
-    @Asynchronous
-    @Transactional
-    public void keepHistory(@Observes @History TaskInstance instance) {
-        final TaskInstance find = taskDAO.findBy(instance.getId());
+    @Asynchronous @Transactional
+    public void keepHistory(@Observes @KeepHistory TaskInstance instance) {
+        final TaskInstance previous = taskDAO.findBy(instance.getId());
+        
+        final History entity = new History();
+        entity.setObjectType(HistoryObjectType.TASK_INSTANCE);
+        entity.setObjectId(instance.getId());
+        entity.setFrom(previous.getState().name());
+        entity.setTo(instance.getState().name());
+        entity.setExecutedBy(instance.getExecutedBy());
+        entity.setExecutedIn(new Date());
+        historyDAO.save(entity);
     }
 }

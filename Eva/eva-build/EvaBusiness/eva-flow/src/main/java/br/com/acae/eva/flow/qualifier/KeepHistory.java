@@ -18,4 +18,4 @@ import javax.inject.Qualifier;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(value = {ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER, ElementType.TYPE})
 @Qualifier
-public @interface History {}
+public @interface KeepHistory {}
