@@ -5,7 +5,7 @@
  */
 package br.com.acae.eva.flow.task;
 
-import br.com.acae.eva.flow.task.qualifier.AlocarPorta;
+import br.com.acae.eva.flow.task.impl.qualifier.AlocarPorta;
 import br.com.acae.eva.model.TaskDef;
 import javax.enterprise.util.AnnotationLiteral;
 import lombok.Getter;

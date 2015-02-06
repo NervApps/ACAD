@@ -8,7 +8,7 @@ package br.com.acae.eva.flow.task.listener;
 import br.com.acae.eva.connector.hosts.AuthHosts;
 import br.com.acae.eva.flow.dao.HistoryDAO;
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
-import br.com.acae.eva.flow.qualifier.KeepHistory;
+import br.com.acae.eva.task.qualifier.KeepHistory;
 import br.com.acae.eva.model.History;
 import br.com.acae.eva.model.TaskInstance;
 import br.com.acae.eva.model.enums.HistoryObjectType;

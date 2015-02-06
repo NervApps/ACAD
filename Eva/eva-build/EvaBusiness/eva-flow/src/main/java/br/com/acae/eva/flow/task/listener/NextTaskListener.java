@@ -7,7 +7,7 @@ package br.com.acae.eva.flow.task.listener;
 
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
 import br.com.acae.eva.flow.dao.TaskOrderDAO;
-import br.com.acae.eva.flow.qualifier.NextTask;
+import br.com.acae.eva.task.qualifier.NextTask;
 import br.com.acae.eva.model.ProcessInstance;
 import br.com.acae.eva.model.TaskDef;
 import br.com.acae.eva.model.TaskInstance;
