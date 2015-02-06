@@ -5,8 +5,8 @@
  */
 package br.com.acae.eva.flow.task.listener;
 
-import br.com.acae.eva.flow.qualifier.Doing;
-import br.com.acae.eva.flow.qualifier.Start;
+import br.com.acae.eva.flow.task.qualifier.Doing;
+import br.com.acae.eva.flow.task.qualifier.Start;
 import br.com.acae.eva.flow.task.TaskNames;
 import br.com.acae.eva.model.TaskDef;
 import br.com.acae.eva.model.TaskInstance;

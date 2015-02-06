@@ -5,10 +5,10 @@
  */
 package br.com.acae.eva.flow.task.impl;
 
-import br.com.acae.eva.flow.qualifier.Doing;
-import br.com.acae.eva.flow.qualifier.Start;
+import br.com.acae.eva.flow.task.qualifier.Doing;
+import br.com.acae.eva.flow.task.qualifier.Start;
 import br.com.acae.eva.flow.task.AutomaticTask;
-import br.com.acae.eva.flow.task.qualifier.AlocarPorta;
+import br.com.acae.eva.flow.task.impl.qualifier.AlocarPorta;
 import br.com.acae.eva.model.TaskInstance;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;

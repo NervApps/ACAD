@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.com.acae.eva.flow.qualifier;
+package br.com.acae.eva.flow.task.qualifier;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
