@@ -18,6 +18,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  *
@@ -39,37 +40,41 @@ public class LoginService {
             if (loaded != null)
                 return loaded;
             else
-                throw new WebApplicationException(Response.Status.NOT_FOUND);
+                throw new WebApplicationException(Status.NOT_FOUND);
         } catch (Exception e) {
-            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
         }
     }
     
     @GET @Path("/getUser")
     public User getUser(@QueryParam("user") String user) {
+        if (user == null)
+            throw new WebApplicationException(Status.BAD_REQUEST);
+        
         try {
             final User loaded = dao.findBy(user);
             if (loaded != null)
                 return loaded;
             else
-                throw new WebApplicationException(Response.Status.NOT_FOUND);
+                throw new WebApplicationException(Status.NOT_FOUND);
         } catch (Exception e) {
-            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
         }
     }
     
     @POST @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public User create(User user) {
+    public Response create(User user) {
         try {
             final User loaded = dao.findByLoginEqualAndPasswordEqual(user.getLogin(), user.getPassword());
             if (loaded == null) {
-                return dao.save(user);
+                dao.save(user);
+                return Response.status(Status.CREATED).build();
             } else {
-                throw new WebApplicationException(Response.Status.CONFLICT);
+                throw new WebApplicationException(Status.CONFLICT);
             }
         } catch (Exception e) {
-            throw new WebApplicationException(e, Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
         }
     }
 }
