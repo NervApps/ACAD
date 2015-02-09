@@ -8,7 +8,6 @@ package br.com.acae.eva.web.beans.common;
 import br.com.acae.eva.connector.RestClient;
 import br.com.acae.eva.connector.qualifier.Json;
 import br.com.acae.eva.connector.hosts.AuthHosts;
-import br.com.acae.eva.connector.hosts.FlowHosts;
 import br.com.acae.eva.model.User;
 import br.com.acae.eva.util.Hasher;
 import br.com.acae.eva.web.context.UserLogged;
@@ -35,7 +34,6 @@ public class LoginBean extends ManagedBean {
     
     @Inject private UserLogged logged;
     @Inject private AuthHosts authHost;
-    @Inject private FlowHosts flowHost;
     @Inject @Json private RestClient rest;
     @Inject private Hasher hasher;
     
@@ -48,9 +46,9 @@ public class LoginBean extends ManagedBean {
     public String doLogin() {
         final Map<String, String> params = new HashMap<>();
         params.put("user", login);
-        params.put("taskId", hasher.sha1Hash(password));
+        params.put("password", hasher.sha1Hash(password));
 
-        final User obj = rest.get(flowHost.runTask(), params, User.class);
+        final User obj = rest.get(authHost.login(), params, User.class);
         logged.login(obj);
         
         return "index?faces-redirect=true";

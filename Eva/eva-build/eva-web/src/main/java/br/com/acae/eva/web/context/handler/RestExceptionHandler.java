@@ -6,14 +6,16 @@
 package br.com.acae.eva.web.context.handler;
 
 import br.com.acae.eva.web.messages.rest.MessagesTranslator;
+import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
-import org.apache.deltaspike.core.api.provider.BeanProvider;
 
 /**
  *
  * @author Vitor
  */
 public class RestExceptionHandler extends ContextExceptionHandler {
+    
+    @Inject private MessagesTranslator translator;
 
     @Override
     protected Class<WebApplicationException> type() {
@@ -23,7 +25,6 @@ public class RestExceptionHandler extends ContextExceptionHandler {
     @Override
     protected String getTranslateMessage(Throwable ex) {
         final WebApplicationException e = (WebApplicationException) ex;
-        final MessagesTranslator msg = BeanProvider.getContextualReference(MessagesTranslator.class);
-        return msg.translate(e);
+        return translator.translate(e);
     }
 }
