@@ -48,9 +48,6 @@ public class LoginService {
     
     @GET @Path("/getUser")
     public User getUser(@QueryParam("user") String user) {
-        if (user == null)
-            throw new WebApplicationException(Status.BAD_REQUEST);
-        
         try {
             final User loaded = dao.findBy(user);
             if (loaded != null)
