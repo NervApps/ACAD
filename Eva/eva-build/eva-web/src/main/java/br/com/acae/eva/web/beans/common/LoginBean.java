@@ -30,7 +30,6 @@ public class LoginBean extends ManagedBean {
     @Getter @Setter private String login;
     @Getter @Setter private String password;
     @Getter @Setter private String email;
-    @Getter @Setter private String password2;
     
     @Inject private UserLogged logged;
     @Inject private AuthHosts authHost;
