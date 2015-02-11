@@ -75,7 +75,7 @@
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                                 <span class="user-info">
                                     <small>Bem-vindo,</small>
-                                    Vitor
+                                    #{logged.login}
                                 </span>
 
                                 <i class="icon-caret-down"></i>
@@ -93,7 +93,7 @@
                                 <li class="divider"></li>
 
                                 <li>
-                                    <a jsf:action="login?faces-redirect=true">
+                                    <a jsf:action="#{loginBean.doLogout}">
                                         <i class="icon-off"></i>
                                         Sair
                                     </a>

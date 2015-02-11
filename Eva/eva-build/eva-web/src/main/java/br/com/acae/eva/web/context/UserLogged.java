@@ -12,6 +12,7 @@ import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.inject.Named;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -23,7 +24,7 @@ public class UserLogged implements Serializable {
     
     private User user;
     
-    @Produces @LoggedIn
+    @Produces @LoggedIn @Named("logged")
     public User getUser() {
         return user;
     }

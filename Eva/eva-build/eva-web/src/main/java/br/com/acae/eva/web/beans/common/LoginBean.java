@@ -67,6 +67,6 @@ public class LoginBean extends ManagedBean {
     
     public String doLogout() {
         logged.logout();
-        return "index?faces-redirect=true";
+        return "login?faces-redirect=true";
     }
 }
