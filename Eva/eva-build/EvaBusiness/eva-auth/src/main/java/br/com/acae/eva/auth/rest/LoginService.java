@@ -9,6 +9,7 @@ import br.com.acae.eva.auth.dao.UserDAO;
 import br.com.acae.eva.model.User;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -30,10 +31,9 @@ import javax.ws.rs.core.Response.Status;
 public class LoginService {
     @Inject private UserDAO dao;
     
-    @GET
-    public User doLogin(@QueryParam("user") String user,
-            @QueryParam("password") String password) {
-        
+    @GET @Path("/login")
+    public User get(@NotNull @QueryParam("user") String user, 
+                    @NotNull @QueryParam("password") String password) {
         try {
             final User loaded = dao.findByLoginEqualAndPasswordEqual(user, password);
             if (loaded != null)
@@ -47,7 +47,7 @@ public class LoginService {
     
     @POST @Path("/create")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response create(User user) {
+    public Response post(User user) {
         try {
             final User loaded = dao.findByLoginEqualAndPasswordEqual(user.getLogin(), user.getPassword());
             if (loaded == null) {
@@ -56,6 +56,25 @@ public class LoginService {
             } else {
                 throw new WebApplicationException(Status.CONFLICT);
             }
+        } catch (Exception e) {
+            throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    @GET @Path("/admin")
+    public User get() {
+        final String user = "admin";
+        return get(user);
+    }
+    
+    @GET
+    public User get(@NotNull @QueryParam("user") String user) {
+        try {
+            final User found = dao.findByLoginEqual(user);
+            if (found != null)
+                return found;
+            else
+                throw new WebApplicationException(Status.NOT_FOUND);
         } catch (Exception e) {
             throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
         }

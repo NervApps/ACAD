@@ -81,7 +81,7 @@ public class TaskService {
     private User loadUser(final String userName) {
         User user;
         if (userName == null || userName.isEmpty()) {
-            user = client.get(host.systemUser(), User.class);
+            user = client.get(host.admin(), User.class);
         } else {
             final Map<String, String> params = new HashMap<>();
             params.put("user", userName);

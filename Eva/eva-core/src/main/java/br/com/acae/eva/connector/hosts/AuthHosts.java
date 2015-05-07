@@ -15,12 +15,12 @@ import org.apache.deltaspike.core.api.message.MessageTemplate;
 @MessageBundle
 public interface AuthHosts {
     
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/doLogin")
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/auth/login")
     String login();
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/create")
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/auth")
+    String getUser();
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/auth/create")
     String newUser();
     @MessageTemplate("http://localhost:8080/eva-auth/rest/login/admin")
-    String systemUser();
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login")
-    String getUser();
+    String admin();
 }
