@@ -70,8 +70,7 @@ public abstract class RestClient {
         return target(url).post(Entity.entity(param, getType()));
     }
     
-    public <T> T post(final String url, final Object param) 
-            throws WebApplicationException {
+    public <T> T post(final String url, final T param) throws WebApplicationException {
         return (T) target(url).post(Entity.entity(param, getType()), param.getClass());
     }
     
@@ -92,7 +91,7 @@ public abstract class RestClient {
             sb.append(entry.getKey()).append("=").append(entry.getValue());
         }
         
-        logger.log(Level.INFO, "Access URL: {0}", sb.toString());
+        logger.log(Level.FINE, "Access URL: {0}", sb.toString());
         return sb.toString();
     }
     
