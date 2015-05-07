@@ -25,31 +25,17 @@ import javax.ws.rs.core.Response.Status;
  * @author Vitor
  */
 @RequestScoped
-@Path("/login")
+@Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 public class LoginService {
-    
     @Inject private UserDAO dao;
     
-    @GET @Path("/doLogin")
+    @GET
     public User doLogin(@QueryParam("user") String user,
             @QueryParam("password") String password) {
         
         try {
             final User loaded = dao.findByLoginEqualAndPasswordEqual(user, password);
-            if (loaded != null)
-                return loaded;
-            else
-                throw new WebApplicationException(Status.NOT_FOUND);
-        } catch (Exception e) {
-            throw new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
-        }
-    }
-    
-    @GET @Path("/getUser")
-    public User getUser(@QueryParam("user") String user) {
-        try {
-            final User loaded = dao.findBy(user);
             if (loaded != null)
                 return loaded;
             else
