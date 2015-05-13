@@ -14,33 +14,37 @@ import br.com.acae.eva.web.util.MessageType;
  */
 public abstract class ManagedBean {
     
-    protected void info(final String title, final String detail) {
+    protected final void info(final String title, final String detail) {
         final Message msg = new Message(MessageType.INFO, title, detail);
         msg.show();
     }
     
-    protected void info(final String title) {
+    protected final void info(final String title) {
         final Message msg = new Message(MessageType.INFO, title);
         msg.show();
     }
     
-    protected void warn(final String title, final String detail) {
+    protected final void warn(final String title, final String detail) {
         final Message msg = new Message(MessageType.WARN, title, detail);
         msg.show();
     }
     
-    protected void warn(final String title) {
+    protected final void warn(final String title) {
         final Message msg = new Message(MessageType.WARN, title);
         msg.show();
     }
     
-    protected void error(final String title, final String detail) {
+    protected final void error(final String title, final String detail) {
         final Message msg = new Message(MessageType.ERROR, title, detail);
         msg.show();
     }
     
-    protected void error(final String title) {
+    protected final void error(final String title) {
         final Message msg = new Message(MessageType.ERROR, title);
         msg.show();
+    }
+    
+    protected final String redirect(final String page) {
+        return page.concat("?faces-redirect=true");
     }
 }

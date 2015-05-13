@@ -50,7 +50,7 @@ public class LoginBean extends ManagedBean {
         final User obj = rest.get(authHost.login(), params, User.class);
         logged.login(obj);
         
-        return "index?faces-redirect=true";
+        return redirect("index");
     }
     
     public void create() {
@@ -67,6 +67,6 @@ public class LoginBean extends ManagedBean {
     
     public String doLogout() {
         logged.logout();
-        return "login?faces-redirect=true";
+        return redirect("login");
     }
 }
