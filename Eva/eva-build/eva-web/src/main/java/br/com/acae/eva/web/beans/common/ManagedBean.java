@@ -7,6 +7,9 @@ package br.com.acae.eva.web.beans.common;
 
 import br.com.acae.eva.web.util.Message;
 import br.com.acae.eva.web.util.MessageType;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
+import javax.faces.context.Flash;
 
 /**
  *
@@ -46,5 +49,22 @@ public abstract class ManagedBean {
     
     protected final String redirect(final String page) {
         return page.concat("?faces-redirect=true");
+    }
+    
+    protected final void putParam(final String paramName, final Object value) {
+        getFlash().put(paramName, value);
+    }
+    
+    protected final <T> T getParam(final String paramName, final Class<T> type) {
+        return (T) getFlash().get(type);
+    }
+    
+    private ExternalContext getExternalContext() {
+        final FacesContext ctx = FacesContext.getCurrentInstance();
+        return ctx.getExternalContext();
+    }
+    
+    private Flash getFlash() {
+        return getExternalContext().getFlash();
     }
 }
