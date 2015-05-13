@@ -12,6 +12,7 @@ import br.com.acae.eva.model.User;
 import br.com.acae.eva.util.Hasher;
 import br.com.acae.eva.web.context.UserLogged;
 import br.com.acae.eva.web.messages.login.LoginMessages;
+import br.com.acae.eva.web.util.Pages;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -52,7 +53,7 @@ public class LoginBean extends ManagedBean {
         final User obj = rest.get(authHost.login(), params, User.class);
         logged.login(obj);
         
-        return redirect("index");
+        return redirect(pages.mainPage());
     }
     
     public void create() {
@@ -69,6 +70,6 @@ public class LoginBean extends ManagedBean {
     
     public String doLogout() {
         logged.logout();
-        return redirect("login");
+        return redirect(pages.loginPage());
     }
 }

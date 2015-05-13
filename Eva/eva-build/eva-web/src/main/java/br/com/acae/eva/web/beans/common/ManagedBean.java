@@ -7,15 +7,18 @@ package br.com.acae.eva.web.beans.common;
 
 import br.com.acae.eva.web.util.Message;
 import br.com.acae.eva.web.util.MessageType;
+import br.com.acae.eva.web.util.Pages;
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
 import javax.faces.context.Flash;
+import javax.inject.Inject;
 
 /**
  *
  * @author Vitor
  */
 public abstract class ManagedBean {
+    @Inject protected Pages pages;
     
     protected void info(final String title, final String detail) {
         final Message msg = new Message(MessageType.INFO, title, detail);
