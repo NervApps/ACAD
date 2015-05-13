@@ -12,7 +12,6 @@ import br.com.acae.eva.model.User;
 import br.com.acae.eva.util.Hasher;
 import br.com.acae.eva.web.context.UserLogged;
 import br.com.acae.eva.web.messages.login.LoginMessages;
-import br.com.acae.eva.web.util.Pages;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
