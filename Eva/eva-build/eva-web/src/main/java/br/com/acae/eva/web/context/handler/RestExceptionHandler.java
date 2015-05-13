@@ -15,7 +15,7 @@ import javax.ws.rs.WebApplicationException;
  */
 public class RestExceptionHandler extends ContextExceptionHandler {
     
-    @Inject private RestMessages translator;
+    @Inject private RestMessages messages;
 
     @Override
     protected Class<WebApplicationException> type() {
@@ -25,6 +25,6 @@ public class RestExceptionHandler extends ContextExceptionHandler {
     @Override
     protected String getTranslateMessage(Throwable ex) {
         final WebApplicationException e = (WebApplicationException) ex;
-        return translator.translate(e);
+        return messages.translate(e.getResponse().getStatus());
     }
 }

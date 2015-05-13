@@ -5,27 +5,22 @@
  */
 package br.com.acae.eva.web.messages.rest;
 
-import java.io.Serializable;
-import java.util.ResourceBundle;
-import javax.annotation.PostConstruct;
-import javax.enterprise.context.ApplicationScoped;
-import javax.ws.rs.WebApplicationException;
+import javax.inject.Inject;
+import org.apache.deltaspike.core.api.message.MessageContext;
 
 /**
  *
  * @author Vitor
  */
-@ApplicationScoped
-public class RestMessages implements Serializable {
-    private final String prefix = "http.";
-    private ResourceBundle httpCodes;
+public class RestMessages {
+    private final String source = RestMessages.class.getCanonicalName();
+    @Inject private MessageContext context;
     
-    @PostConstruct
-    public void init() {
-        httpCodes = ResourceBundle.getBundle("http-codes");
-    }
-    
-    public String translate(final WebApplicationException e) {
-        return httpCodes.getString(prefix + e.getResponse().getStatus());
+    public String translate(final int httpCode) {
+        final String template = "{"+httpCode+"}";
+        return context.messageSource(source)
+                      .message()
+                      .template(template)
+                      .toString();
     }
 }
