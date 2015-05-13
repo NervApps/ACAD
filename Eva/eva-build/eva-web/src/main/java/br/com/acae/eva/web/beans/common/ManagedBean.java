@@ -17,45 +17,45 @@ import javax.faces.context.Flash;
  */
 public abstract class ManagedBean {
     
-    protected final void info(final String title, final String detail) {
+    protected void info(final String title, final String detail) {
         final Message msg = new Message(MessageType.INFO, title, detail);
         msg.show();
     }
     
-    protected final void info(final String title) {
+    protected void info(final String title) {
         final Message msg = new Message(MessageType.INFO, title);
         msg.show();
     }
     
-    protected final void warn(final String title, final String detail) {
+    protected void warn(final String title, final String detail) {
         final Message msg = new Message(MessageType.WARN, title, detail);
         msg.show();
     }
     
-    protected final void warn(final String title) {
+    protected void warn(final String title) {
         final Message msg = new Message(MessageType.WARN, title);
         msg.show();
     }
     
-    protected final void error(final String title, final String detail) {
+    protected void error(final String title, final String detail) {
         final Message msg = new Message(MessageType.ERROR, title, detail);
         msg.show();
     }
     
-    protected final void error(final String title) {
+    protected void error(final String title) {
         final Message msg = new Message(MessageType.ERROR, title);
         msg.show();
     }
     
-    protected final String redirect(final String page) {
+    protected String redirect(final String page) {
         return page.concat("?faces-redirect=true");
     }
     
-    protected final void putParam(final String paramName, final Object value) {
+    protected void putParam(final String paramName, final Object value) {
         getFlash().put(paramName, value);
     }
     
-    protected final <T> T getParam(final String paramName, final Class<T> type) {
+    protected <T> T getParam(final String paramName, final Class<T> type) {
         return (T) getFlash().get(type);
     }
     

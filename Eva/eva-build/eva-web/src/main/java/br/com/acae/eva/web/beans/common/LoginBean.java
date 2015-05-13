@@ -11,6 +11,7 @@ import br.com.acae.eva.connector.hosts.AuthHosts;
 import br.com.acae.eva.model.User;
 import br.com.acae.eva.util.Hasher;
 import br.com.acae.eva.web.context.UserLogged;
+import br.com.acae.eva.web.messages.login.LoginMessages;
 import java.util.HashMap;
 import java.util.Map;
 import javax.annotation.PostConstruct;
@@ -35,6 +36,7 @@ public class LoginBean extends ManagedBean {
     @Inject private AuthHosts authHost;
     @Inject @Json private RestClient rest;
     @Inject private Hasher hasher;
+    @Inject private LoginMessages messages;
     
     @PostConstruct
     public void init() {
@@ -60,9 +62,9 @@ public class LoginBean extends ManagedBean {
         user.setEmail(email);
         
         if (rest.post(authHost.newUser(), user) != null)
-            info("Usuário criado com sucesso");
+            info(messages.created());
         else
-            error("Erro ao criar usuário", "Contate o administrador");
+            error(messages.errorCreate(), messages.contactAdmin());
     }
     
     public String doLogout() {
