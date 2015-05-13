@@ -5,7 +5,7 @@
  */
 package br.com.acae.eva.web.context.handler;
 
-import br.com.acae.eva.web.messages.rest.MessagesTranslator;
+import br.com.acae.eva.web.messages.rest.RestMessages;
 import javax.inject.Inject;
 import javax.ws.rs.WebApplicationException;
 
@@ -15,7 +15,7 @@ import javax.ws.rs.WebApplicationException;
  */
 public class RestExceptionHandler extends ContextExceptionHandler {
     
-    @Inject private MessagesTranslator translator;
+    @Inject private RestMessages translator;
 
     @Override
     protected Class<WebApplicationException> type() {

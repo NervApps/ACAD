@@ -16,8 +16,8 @@ import javax.ws.rs.WebApplicationException;
  * @author Vitor
  */
 @ApplicationScoped
-public class MessagesTranslator implements Serializable {
-    
+public class RestMessages implements Serializable {
+    private final String prefix = "http.";
     private ResourceBundle httpCodes;
     
     @PostConstruct
@@ -26,6 +26,6 @@ public class MessagesTranslator implements Serializable {
     }
     
     public String translate(final WebApplicationException e) {
-        return httpCodes.getString(String.valueOf(e.getResponse().getStatus()));
+        return httpCodes.getString(prefix + e.getResponse().getStatus());
     }
 }
