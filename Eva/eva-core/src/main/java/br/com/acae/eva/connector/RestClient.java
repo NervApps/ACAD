@@ -91,7 +91,7 @@ public abstract class RestClient {
             sb.append(entry.getKey()).append("=").append(entry.getValue());
         }
         
-        logger.log(Level.FINE, "Access URL: {0}", sb.toString());
+        logger.log(Level.INFO, "Access URL: {0}", sb.toString());
         return sb.toString();
     }
     
