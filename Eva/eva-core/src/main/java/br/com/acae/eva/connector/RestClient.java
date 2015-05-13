@@ -91,8 +91,9 @@ public abstract class RestClient {
             sb.append(entry.getKey()).append("=").append(entry.getValue());
         }
         
-        logger.log(Level.INFO, "Access URL: {0}", sb.toString());
-        return sb.toString();
+        final String builded = sb.toString();
+        logger.log(Level.INFO, "Access URL: {0}", builded);
+        return builded;
     }
     
     protected Invocation.Builder target(final String url) {
