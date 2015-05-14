@@ -26,6 +26,7 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 /**
  *
@@ -52,7 +53,7 @@ public class TaskService {
             return Response.ok().build();
         } catch (Exception e) {
             event.fire(e);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
     }
     
@@ -66,7 +67,7 @@ public class TaskService {
             return Response.ok().build();
         } catch (Exception e) {
             event.fire(e);
-            throw new WebApplicationException(Response.Status.INTERNAL_SERVER_ERROR);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
     }
     
@@ -74,7 +75,7 @@ public class TaskService {
         final TaskInstance find = instanceDAO.findBy(Long.parseLong(taskId));
         
         if (find != null)
-            throw new WebApplicationException(Response.Status.NOT_FOUND);
+            throw new WebApplicationException(Status.NOT_FOUND);
         else
             return find;
     }
@@ -89,7 +90,7 @@ public class TaskService {
 
             user = client.get(host.getUser(), params, User.class);
             if (user == null) {
-                throw new WebApplicationException(Response.Status.NOT_FOUND);
+                throw new WebApplicationException(Status.NOT_FOUND);
             }
         }
         
