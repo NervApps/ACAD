@@ -61,10 +61,8 @@ public class LoginBean extends ManagedBean {
         user.setPassword(hasher.sha1Hash(password));
         user.setEmail(email);
         
-        if (rest.post(authHost.newUser(), user) != null)
-            info(messages.created());
-        else
-            error(messages.errorCreate(), messages.contactAdmin());
+        rest.post(authHost.newUser(), user);
+        info(messages.created());
     }
     
     public String doLogout() {
