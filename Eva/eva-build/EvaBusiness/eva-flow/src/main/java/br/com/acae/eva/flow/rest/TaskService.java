@@ -18,6 +18,7 @@ import java.util.Map;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Event;
 import javax.inject.Inject;
+import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -25,7 +26,6 @@ import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 /**
  *
@@ -40,10 +40,11 @@ public class TaskService {
     @Inject private TaskInstanceDAO instanceDAO;
     @Inject private TaskExecutorDispatcher executor;
     @Inject @Json private RestClient client;
-    @Inject @StackTrace(printStackTrace = true) private Event<Exception> event;
+    @Inject @StackTrace private Event<Exception> event;
     
     @GET @Path("/run")
-    public Response run(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
+    public Response run(@QueryParam("user") String user, 
+                        @NotNull @QueryParam("taskId") String taskId) {
         try {
             final TaskInstance instance = loadTask(taskId);
             instance.setExecutedBy(loadUser(user));
@@ -56,7 +57,8 @@ public class TaskService {
     }
     
     @GET @Path("/execute")
-    public Response execute(@QueryParam("user") String user, @QueryParam("taskId") String taskId) {
+    public Response execute(@QueryParam("user") String user, 
+                            @NotNull @QueryParam("taskId") String taskId) {
         try {
             final TaskInstance instance = loadTask(taskId);
             instance.setExecutedBy(loadUser(user));
@@ -68,7 +70,6 @@ public class TaskService {
         }
     }
     
-    @Transactional
     private TaskInstance loadTask(final String taskId) {
         final TaskInstance find = instanceDAO.findBy(Long.parseLong(taskId));
         

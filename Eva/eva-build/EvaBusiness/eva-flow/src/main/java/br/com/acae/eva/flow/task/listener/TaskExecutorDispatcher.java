@@ -10,7 +10,6 @@ import br.com.acae.eva.flow.task.qualifier.Start;
 import br.com.acae.eva.flow.task.TaskNames;
 import br.com.acae.eva.model.TaskDef;
 import br.com.acae.eva.model.TaskInstance;
-import br.com.acae.eva.model.User;
 import java.lang.annotation.Annotation;
 import java.util.logging.Level;
 import java.util.logging.Logger;
