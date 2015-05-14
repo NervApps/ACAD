@@ -8,6 +8,8 @@ package br.com.acae.eva.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -25,6 +27,7 @@ public class TaskOrder implements Serializable {
     
     @Id
     @Column(name = "TASK_ORDER_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter private Long id;
     
     @JoinColumn(name = "PREVIOUS_TASK_DEF_ID", referencedColumnName = "TASK_DEF_ID", nullable = false)

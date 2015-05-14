@@ -8,6 +8,8 @@ package br.com.acae.eva.model;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import lombok.Getter;
@@ -23,5 +25,6 @@ public class ProcessInstance implements Serializable {
     
     @Id
     @Column(name = "PROCESS_INSTANCE_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter private Integer id;
 }

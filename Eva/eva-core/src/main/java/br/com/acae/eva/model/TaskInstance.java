@@ -11,6 +11,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -31,6 +33,7 @@ public class TaskInstance implements Serializable {
     
     @Id
     @Column(name = "TASK_INSTANCE_ID")
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter private Long id;
     
     @Column(name = "TASK_STATE")
