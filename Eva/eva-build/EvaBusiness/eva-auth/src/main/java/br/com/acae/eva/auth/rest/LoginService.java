@@ -61,6 +61,7 @@ public class LoginService {
             business.create(user);
             return Response.status(Status.CREATED).build();
         } catch (BusinessException e) {
+            event.fire(e);
             ex = new WebApplicationException(e, Status.CONFLICT);
         } catch (Exception e) {
             event.fire(e);
