@@ -5,7 +5,8 @@
  */
 package br.com.acae.eva.auth.rest;
 
-import br.com.acae.eva.auth.dao.UserDAO;
+import br.com.acae.eva.auth.business.LoginBusiness;
+import br.com.acae.eva.exception.BusinessException;
 import br.com.acae.eva.exception.StackTrace;
 import br.com.acae.eva.model.User;
 import javax.enterprise.context.RequestScoped;
@@ -31,8 +32,8 @@ import javax.ws.rs.core.Response.Status;
 @Path("/auth")
 @Produces(MediaType.APPLICATION_JSON)
 public class LoginService {
-    @Inject private UserDAO dao;
-    @Inject @StackTrace(printStackTrace = true) private Event<Exception> event;
+    @Inject private LoginBusiness business;
+    @Inject @StackTrace private Event<Exception> event;
     
     @GET @Path("/login")
     public User get(@NotNull @QueryParam("user") String user, 
@@ -40,7 +41,7 @@ public class LoginService {
         
         WebApplicationException ex;
         try {
-            final User loaded = dao.findByLoginEqualAndPasswordEqual(user, password);
+            final User loaded = business.get(user, password);
             if (loaded != null)
                 return loaded;
             else
@@ -57,13 +58,10 @@ public class LoginService {
     public Response post(User user) {
         WebApplicationException ex;
         try {
-            final User loaded = dao.findByLoginEqualAndPasswordEqual(user.getLogin(), user.getPassword());
-            if (loaded == null) {
-                dao.save(user);
-                return Response.status(Status.CREATED).build();
-            } else {
-                ex = new WebApplicationException(Status.CONFLICT);
-            }
+            business.create(user);
+            return Response.status(Status.CREATED).build();
+        } catch (BusinessException e) {
+            ex = new WebApplicationException(e, Status.CONFLICT);
         } catch (Exception e) {
             event.fire(e);
             ex = new WebApplicationException(e, Status.INTERNAL_SERVER_ERROR);
@@ -81,7 +79,7 @@ public class LoginService {
     public User get(@QueryParam("user") String user) {
         WebApplicationException ex;
         try {
-            final User found = dao.findByLoginEqual(user);
+            final User found = business.get(user);
             if (found != null)
                 return found;
             else

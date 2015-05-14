@@ -19,5 +19,5 @@ import javax.inject.Qualifier;
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Qualifier
 public @interface StackTrace {
-    boolean printStackTrace() default false;
+    boolean printStackTrace() default true;
 }
