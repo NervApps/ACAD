@@ -7,7 +7,9 @@ package br.com.acae.eva.auth.dao;
 
 import br.com.acae.eva.model.User;
 import org.apache.deltaspike.data.api.EntityRepository;
+import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
+import org.apache.deltaspike.data.api.SingleResultType;
 
 /**
  *
@@ -16,6 +18,9 @@ import org.apache.deltaspike.data.api.Repository;
 @Repository
 public interface UserDAO extends EntityRepository<User, Long> {
     
+    @Query(singleResult = SingleResultType.OPTIONAL)
     User findByLoginEqualAndPasswordEqual(final String login, final String password);
+    
+    @Query(singleResult = SingleResultType.OPTIONAL)
     User findByLoginEqual(final String login);
 }
