@@ -133,10 +133,6 @@
                         </a>
                     </li>
                 </form><!--/.nav-list-->
-
-                <div class="sidebar-collapse" id="sidebar-collapse">
-                    <i class="icon-double-angle-left"></i>
-                </div>
             </div>
         </div>
 
@@ -164,6 +160,7 @@
             </div>
 
             <div class="page-content">
+                <ui:fragment rendered="#{not empty flash.message}">
                 <div class="#{flash.message.type.css}}">
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="icon-remove"></i>
@@ -174,6 +171,7 @@
                     </strong>
                         #{flash.message.detail} <br/>
                 </div>
+                </ui:fragment>
                 <ui:insert name="content"/>
             </div>
         </div>
