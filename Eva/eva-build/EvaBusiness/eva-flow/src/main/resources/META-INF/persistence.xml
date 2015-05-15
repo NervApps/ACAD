@@ -7,6 +7,8 @@
     <class>br.com.acae.eva.model.TaskDef</class>
     <class>br.com.acae.eva.model.TaskInstance</class>
     <class>br.com.acae.eva.model.TaskOrder</class>
+    <class>br.com.acae.eva.model.Permission</class>
+    <class>br.com.acae.eva.model.Profile</class>
     <class>br.com.acae.eva.model.User</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
