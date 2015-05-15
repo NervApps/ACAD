@@ -10,7 +10,6 @@ import br.com.acae.eva.connector.hosts.AuthHosts;
 import br.com.acae.eva.connector.qualifier.Json;
 import br.com.acae.eva.model.User;
 import br.com.acae.eva.web.context.interceptor.qualifier.Restrict;
-import br.com.acae.eva.web.messages.GeneralMessages;
 import br.com.acae.eva.web.messages.rest.RestMessages;
 import br.com.acae.eva.web.qualifiers.LoggedIn;
 import java.lang.reflect.Method;
