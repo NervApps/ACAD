@@ -30,12 +30,13 @@ public class RestMessages {
     
     public String parse(final String template, final Serializable... params) {
         Message message = context.messageSource(source)
-                                       .message()
-                                       .template(template);
+                                 .message()
+                                 .template(template);
         
-        if (params != null && params.length > 0) {
-            message = message.argument(params);
-        }
-        return message.toString();
+        if (params != null && params.length > 0)
+            return message.argument(params)
+                          .toString();
+        else
+            return message.toString();
     }
 }
