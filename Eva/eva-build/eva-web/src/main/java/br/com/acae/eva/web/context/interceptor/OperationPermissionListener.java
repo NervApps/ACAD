@@ -40,19 +40,19 @@ public class OperationPermissionListener {
         final Method operation = ctx.getMethod();
         if (operation.isAnnotationPresent(Restrict.class)) {
             final Restrict annotation = operation.getAnnotation(Restrict.class);
-            final String permission = annotation.permission();
+            final String name = annotation.ruleName();
             
-            if (!permission.isEmpty()) {
-                callService(permission);
+            if (!name.isEmpty()) {
+                callService(name);
             }
         }
         return ctx.proceed();
     }
     
-    private void callService(final String permission) throws Exception {
+    private void callService(final String name) throws Exception {
         final String user = logged.getLogin();
         final Map<String, String> params = new ConcurrentHashMap<>();
-        params.put("name", permission);
+        params.put("name", name);
         params.put("user", user);
 
         try {
