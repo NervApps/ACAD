@@ -5,7 +5,6 @@
  */
 package br.com.acae.eva.web.messages.login;
 
-import br.com.acae.eva.web.messages.GeneralMessages;
 import org.apache.deltaspike.core.api.message.MessageBundle;
 import org.apache.deltaspike.core.api.message.MessageTemplate;
 
@@ -14,7 +13,7 @@ import org.apache.deltaspike.core.api.message.MessageTemplate;
  * @author vitor
  */
 @MessageBundle
-public interface LoginMessages extends GeneralMessages {
+public interface LoginMessages {
     
     @MessageTemplate("{user.create}")
     String created();
