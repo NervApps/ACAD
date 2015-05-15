@@ -21,6 +21,8 @@ public interface AuthHosts {
     String getUser();
     @MessageTemplate("http://localhost:8080/eva-auth/rest/auth/create")
     String newUser();
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/login/admin")
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/auth/admin")
     String admin();
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/permission")
+    String hasPermission();
 }

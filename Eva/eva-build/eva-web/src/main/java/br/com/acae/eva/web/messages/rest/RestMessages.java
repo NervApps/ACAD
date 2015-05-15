@@ -5,7 +5,9 @@
  */
 package br.com.acae.eva.web.messages.rest;
 
+import java.io.Serializable;
 import javax.inject.Inject;
+import org.apache.deltaspike.core.api.message.Message;
 import org.apache.deltaspike.core.api.message.MessageContext;
 
 /**
@@ -18,9 +20,22 @@ public class RestMessages {
     
     public String translate(final int httpCode) {
         final String template = "{"+httpCode+"}";
-        return context.messageSource(source)
-                      .message()
-                      .template(template)
-                      .toString();
+        return parse(template);
+    }
+    
+    public String translate(final int httpCode, final Serializable... params) {
+        final String template = "{"+httpCode+".param}";
+        return parse(template, params);
+    }
+    
+    public String parse(final String template, final Serializable... params) {
+        Message message = context.messageSource(source)
+                                       .message()
+                                       .template(template);
+        
+        if (params != null && params.length > 0) {
+            message = message.argument(params);
+        }
+        return message.toString();
     }
 }

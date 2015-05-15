@@ -29,8 +29,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>3.2</version>
                 <configuration>
-                    <source>${maven.compiler.source}</source>
-                    <target>${maven.compiler.target}</target>
+                    <source>${maven.compiler.version}</source>
+                    <target>${maven.compiler.version}</target>
                     <compilerArguments>
                         <endorseddirs>${endorsed.dir}</endorseddirs>
                     </compilerArguments>
@@ -61,7 +61,7 @@
                                 <artifactItem>
                                     <groupId>javax</groupId>
                                     <artifactId>javaee-api</artifactId>
-                                    <version>7.0</version>
+                                    <version>${javaee.version}</version>
                                     <type>jar</type>
                                 </artifactItem>
                             </artifactItems>
