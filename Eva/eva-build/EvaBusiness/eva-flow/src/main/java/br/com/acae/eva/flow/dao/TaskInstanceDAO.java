@@ -12,7 +12,6 @@ import java.util.List;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.Repository;
-import org.apache.deltaspike.jpa.api.transaction.Transactional;
 
 /**
  *
@@ -21,7 +20,6 @@ import org.apache.deltaspike.jpa.api.transaction.Transactional;
 @Repository
 public interface TaskInstanceDAO extends EntityRepository<TaskInstance, Long> {
     
-    @Transactional
     @Query(value = "SELECT t.taskDef FROM TaskInstance t "
                  + "WHERE t.taskDef in (?1) "
                  + "AND t.process = ?2 "
