@@ -7,6 +7,7 @@ package br.com.acae.eva.auth.business;
 
 import br.com.acae.eva.auth.dao.UserDAO; 
 import br.com.acae.eva.exception.BusinessException;
+import br.com.acae.eva.model.Profile;
 import br.com.acae.eva.model.User;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -25,6 +26,7 @@ public class LoginBusiness {
         if (exists(user.getLogin())) {
             throw new BusinessException("User already exists");
         } else {
+            user.toLowerCaseLogin();
             dao.save(user);
         }
     }
@@ -34,10 +36,15 @@ public class LoginBusiness {
     }
     
     public User get(final String login) {
-        return dao.findByLoginEqual(login);
+        return dao.findByLoginEqual(login.toLowerCase());
     }
     
     public User get(final String login, final String password) {
-        return dao.findByLoginEqualAndPasswordEqual(login, password);
+        return dao.findByLoginEqualAndPasswordEqual(login.toLowerCase(), password);
+    }
+    
+    public void changeProfile(final User user, final Profile newProfile){
+        user.setProfile(newProfile);
+        dao.save(user);
     }
 }

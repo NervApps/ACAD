@@ -6,6 +6,8 @@
 package br.com.acae.eva.auth.context;
 
 import br.com.acae.eva.auth.rest.LoginService;
+import br.com.acae.eva.auth.rest.PermissionService;
+import br.com.acae.eva.auth.rest.ProfileService;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.ApplicationPath;
@@ -22,6 +24,8 @@ public class AuthPublisher extends Application {
     public Set<Class<?>> getClasses() {
         final Set<Class<?>> servers = new HashSet<>();
         servers.add(LoginService.class);
+        servers.add(PermissionService.class);
+        servers.add(ProfileService.class);
         
         return servers;
     }
