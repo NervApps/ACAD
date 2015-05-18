@@ -36,10 +36,9 @@ public class UsernameValidator {
     
     public String buildMessage() {
         final StringBuilder sb = new StringBuilder();
-        sb.append(messages.invalidLogin())
-          .append(". ")
-          .append(messages.invalidLoginDetail(Arrays.toString(notAllowed)));
-        
-        return sb.toString();
+        return sb.append(messages.invalidLogin())
+                 .append(". ")
+                 .append(messages.invalidLogin(Arrays.toString(notAllowed)))
+                 .toString();
     }
 }

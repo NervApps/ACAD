@@ -24,5 +24,5 @@ public interface LoginMessages {
     @MessageTemplate("{user.login.invalid}")
     String invalidLogin();
     @MessageTemplate("{user.login.invalid.detail}")
-    String invalidLoginDetail(final String detail);
+    String invalidLogin(final String detail);
 }
