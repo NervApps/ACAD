@@ -18,6 +18,4 @@ import javax.inject.Qualifier;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE, ElementType.FIELD, ElementType.METHOD, ElementType.PARAMETER})
 @Qualifier
-public @interface StackTrace {
-    boolean printStackTrace() default true;
-}
+public @interface StackTrace {}

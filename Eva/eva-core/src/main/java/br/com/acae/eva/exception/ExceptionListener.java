@@ -20,12 +20,12 @@ public class ExceptionListener {
     private static final Logger logger = Logger.getLogger("ExceptionLogger");
     
     @Asynchronous
-    public void logException(@Observes @StackTrace(printStackTrace = false) Exception ex) {
+    public void logException(@Observes Exception ex) {
         logger.log(Level.SEVERE, "Exception occurred: {0}", ex.getMessage());
     }
     
     @Asynchronous
-    public void showStackTrace(@Observes @StackTrace(printStackTrace = true) Exception ex) {
+    public void showStackTrace(@Observes @StackTrace Exception ex) {
         logException(ex);
         ex.printStackTrace(System.err);
     }

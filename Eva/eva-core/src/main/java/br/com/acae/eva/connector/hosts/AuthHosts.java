@@ -23,6 +23,10 @@ public interface AuthHosts {
     String newUser();
     @MessageTemplate("http://localhost:8080/eva-auth/rest/auth/admin")
     String admin();
-    @MessageTemplate("http://localhost:8080/eva-auth/rest/permission")
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/permission/page")
+    String pagePermissions();
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/permission/operation")
     String hasPermission();
+    @MessageTemplate("http://localhost:8080/eva-auth/rest/permission/blocked")
+    String blockedPages();
 }
