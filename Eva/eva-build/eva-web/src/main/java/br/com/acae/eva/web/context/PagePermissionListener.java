@@ -28,7 +28,7 @@ public class PagePermissionListener {
         final FacesContext ctx = FacesContext.getCurrentInstance();
         final String page = getPage(ctx);
         
-        if (pages.contains(page)) {
+        if (logged.isActive() && pages.contains(page)) {
             if (!logged.isAbleToView(page)) {
                 final String outcome = "denied?faces-redirect=true";
                 NavigationHandler nav = ctx.getApplication().getNavigationHandler();
