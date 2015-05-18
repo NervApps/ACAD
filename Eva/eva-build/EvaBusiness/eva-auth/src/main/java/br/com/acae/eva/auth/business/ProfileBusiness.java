@@ -5,8 +5,12 @@
  */
 package br.com.acae.eva.auth.business;
 
+import br.com.acae.eva.auth.dao.PermissionDAO;
 import br.com.acae.eva.auth.dao.ProfileDAO;
+import br.com.acae.eva.model.Permission;
 import br.com.acae.eva.model.Profile;
+import java.util.ArrayList;
+import java.util.List;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 
@@ -17,6 +21,7 @@ import javax.inject.Inject;
 @RequestScoped
 public class ProfileBusiness {
     @Inject private ProfileDAO profileDAO;
+    @Inject private PermissionDAO permissionDAO;
     
     public boolean hasPermission(final Profile profile, final String ruleName) {
         if (profile != null)
@@ -27,5 +32,16 @@ public class ProfileBusiness {
     
     public Profile find(final String name) {
         return profileDAO.findByNameEqual(name);
+    }
+    
+    public List<String> getBlockedViews() {
+        return permissionDAO.findBlockedViews();
+    }
+    
+    public List<Permission> getPagePermissions(final Profile profile) {
+        if (profile != null)
+            return profileDAO.findPagePermissions(profile.getId());
+        else
+            return new ArrayList<>();
     }
 }

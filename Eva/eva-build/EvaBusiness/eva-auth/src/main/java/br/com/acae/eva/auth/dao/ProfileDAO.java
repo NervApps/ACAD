@@ -5,7 +5,9 @@
  */
 package br.com.acae.eva.auth.dao;
 
+import br.com.acae.eva.model.Permission;
 import br.com.acae.eva.model.Profile;
+import java.util.List;
 import org.apache.deltaspike.data.api.EntityRepository;
 import org.apache.deltaspike.data.api.Query;
 import org.apache.deltaspike.data.api.QueryResult;
@@ -24,6 +26,16 @@ public interface ProfileDAO extends EntityRepository<Profile, Long> {
                  + "and pm.name = ?2")
     QueryResult findPermission(final Long profileId, final String ruleName);
     
+    @Query(value = "select pm from Profile p join p.permissions pm "
+                 + "where p.id = ?1 "
+                 + "and pm.toView = ?2")
+    QueryResult findPagePermission(final Long profileId, final String page);
+    
     @Query(singleResult = SingleResultType.OPTIONAL)
     Profile findByNameEqual(final String name);
+    
+    @Query(value = "select pm from Profile p join p.permissions pm "
+                 + "where p.id = ?1 "
+                 + "and pm.toView is not null")
+    List<Permission> findPagePermissions(final Long profileId);
 }
