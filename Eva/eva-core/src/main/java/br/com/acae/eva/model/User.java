@@ -15,8 +15,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Pattern;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,7 +37,6 @@ public class User implements Serializable {
     @Column(name = "PASSWORD", nullable = false)
     @Getter @Setter private String password;
     
-    @Pattern(regexp = ".+@.+\\.[a-z]+")
     @Column(name = "EMAIL", nullable = false)
     @Getter @Setter private String email;
     
