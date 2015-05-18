@@ -5,9 +5,11 @@
  */
 package br.com.acae.eva.web.context.validator;
 
+import br.com.acae.eva.web.messages.login.LoginMessages;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.inject.Inject;
 import javax.inject.Named;
 import javax.validation.ValidationException;
 
@@ -18,7 +20,7 @@ import javax.validation.ValidationException;
 @Named("samePwdValidator") 
 @RequestScoped
 public class SamePasswordValidator {
-    
+    @Inject private LoginMessages messages;
     private String source;
     private String target;
     
@@ -35,7 +37,7 @@ public class SamePasswordValidator {
     private void validate() {
         if (source != null && target != null) {
             if (!target.equals(source)) {
-                throw new ValidationException("As senhas devem ser iguais");
+                throw new ValidationException(messages.unmatchPassword());
             }    
         }
     }

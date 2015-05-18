@@ -19,4 +19,10 @@ public interface LoginMessages {
     String created();
     @MessageTemplate("{user.create.error}")
     String errorCreate();
+    @MessageTemplate("{user.password.unmatch}")
+    String unmatchPassword();
+    @MessageTemplate("{user.login.invalid}")
+    String invalidLogin();
+    @MessageTemplate("{user.login.invalid.detail}")
+    String invalidLoginDetail(final String detail);
 }
