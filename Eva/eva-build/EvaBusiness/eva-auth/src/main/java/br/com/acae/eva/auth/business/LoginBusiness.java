@@ -26,7 +26,7 @@ public class LoginBusiness {
         if (exists(user.getLogin())) {
             throw new BusinessException("User already exists");
         } else {
-            user.toLowerCaseLogin();
+            user.toLowerCaseLoginAndPassword();
             dao.save(user);
         }
     }
@@ -40,7 +40,7 @@ public class LoginBusiness {
     }
     
     public User get(final String login, final String password) {
-        return dao.findByLoginEqualAndPasswordEqual(login.toLowerCase(), password);
+        return dao.findByLoginEqualAndPasswordEqual(login.toLowerCase(), password.toLowerCase());
     }
     
     public void changeProfile(final User user, final Profile newProfile){
