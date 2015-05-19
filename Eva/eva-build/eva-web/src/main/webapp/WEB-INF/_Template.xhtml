@@ -14,10 +14,10 @@
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'/>
         <link href="/evastatic/resources/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/evastatic/resources/css/bootstrap-responsive.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="/evastatic/resources/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="/evastatic/resources/css/ace.min.css" />
-        <link rel="stylesheet" href="/evastatic/resources/css/ace-responsive.min.css" />
-        <link rel="stylesheet" href="/evastatic/resources/css/ace-skins.min.css" />
+        <link href="/evastatic/resources/css/font-awesome.min.css" rel="stylesheet" />
+        <link href="/evastatic/resources/css/ace.min.css" rel="stylesheet" />
+        <link href="/evastatic/resources/css/ace-responsive.min.css" rel="stylesheet" />
+        <link href="/evastatic/resources/css/ace-skins.min.css" rel="stylesheet" />
     </head>
     <body jsf:id="body">
         <div class="navbar">
@@ -28,7 +28,7 @@
                             <i class="icon-leaf"></i>
                             eva
                         </small>
-                    </a><!--/.brand-->
+                    </a>
 
                     <ul class="nav ace-nav pull-right">
                         <li class="grey">
@@ -40,13 +40,13 @@
                             <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
                                 <li class="nav-header">
                                     <i class="icon-ok"></i>
-                                    Indicadores
+                                    #{msg['menu.metrics']}
                                 </li>
 
                                 <li>
                                     <a href="#">
                                         <div class="clearfix">
-                                            <span class="pull-left">Projetos Atrasados</span>
+                                            <span class="pull-left">#{msg['menu.metrics.lateProjects']}</span>
                                             <span class="pull-right">4%</span>
                                         </div>
 
@@ -59,7 +59,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="clearfix">
-                                            <span class="pull-left">Pendentes Aprovação</span>
+                                            <span class="pull-left">#{msg['menu.metrics.pendentProjects']}</span>
                                             <span class="pull-right">15%</span>
                                         </div>
 
@@ -74,7 +74,7 @@
                         <li class="light-blue">
                             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                                 <span class="user-info">
-                                    <small>Bem-vindo,</small>
+                                    <small>#{msg['welcome']},</small>
                                     #{logged.login}
                                 </span>
 
@@ -86,7 +86,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="icon-cog"></i>
-                                        Configurações
+                                        #{msg['menu.config']}
                                     </a>
                                 </li>
 
@@ -95,7 +95,7 @@
                                 <li>
                                     <a jsf:action="#{loginBean.doLogout}">
                                         <i class="icon-off"></i>
-                                        Sair
+                                        #{msg['menu.logout']}
                                     </a>
                                 </li>
                             </form>
@@ -115,21 +115,21 @@
                     <li>
                         <a jsf:action="index?faces-redirect=true">
                             <i class="icon-dollar"></i>
-                            <span class="menu-text"> Financeiro </span>
+                            <span class="menu-text"> #{msg['menu.financial']} </span>
                         </a>
                     </li>
 
                     <li>
                         <a jsf:action="index?faces-redirect=true">
                             <i class="icon-folder-open-alt"></i>
-                            <span class="menu-text"> Projetos </span>
+                            <span class="menu-text"> #{msg['menu.projects']} </span>
                         </a>
                     </li>
 
                     <li>
                         <a jsf:action="index?faces-redirect=true">
                             <i class="icon-user"></i>
-                            <span class="menu-text"> Recursos </span>
+                            <span class="menu-text"> #{msg['menu.resources']} </span>
                         </a>
                     </li>
                 </form><!--/.nav-list-->

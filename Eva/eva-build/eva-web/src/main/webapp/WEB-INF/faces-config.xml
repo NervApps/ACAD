@@ -9,4 +9,11 @@
             br.com.acae.eva.web.context.CustomExceptionHandlerFactory
         </exception-handler-factory>
     </factory>
+    
+    <application>
+        <resource-bundle>
+            <base-name>br.com.acae.eva.web.messages.xhtml.pageLabels</base-name>
+            <var>msg</var>
+        </resource-bundle>
+    </application>
 </faces-config>

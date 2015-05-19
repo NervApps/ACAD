@@ -13,10 +13,10 @@
         <link href='http://fonts.googleapis.com/css?family=Oswald:400,300,700' rel='stylesheet' type='text/css'/>
         <link href="/evastatic/resources/css/bootstrap.min.css" rel="stylesheet" />
         <link href="/evastatic/resources/css/bootstrap-responsive.min.css" rel="stylesheet" />
-        <link rel="stylesheet" href="/evastatic/resources/css/font-awesome.min.css" />
-        <link rel="stylesheet" href="/evastatic/resources/css/ace.min.css" />
-        <link rel="stylesheet" href="/evastatic/resources/css/ace-responsive.min.css" />
-        <link rel="stylesheet" href="/evastatic/resources/css/ace-skins.min.css" />
+        <link href="/evastatic/resources/css/font-awesome.min.css" rel="stylesheet"/>
+        <link href="/evastatic/resources/css/ace.min.css" rel="stylesheet"/>
+        <link href="/evastatic/resources/css/ace-responsive.min.css" rel="stylesheet"/>
+        <link href="/evastatic/resources/css/ace-skins.min.css" rel="stylesheet"/>
     </head>
     <body jsf:id="body">
         <div class="main-container container-fluid">
@@ -28,11 +28,11 @@
                                 <h1 class="grey lighter smaller">
                                     <span class="blue bigger-125"><i class="icon-warning-sign"></i>
                                         =[
-                                    </span> Ah não <b>#{logged.login}</b>! Você não tem permissão para acessar esta página
+                                    </span> #{msg['message.prefix']} <b>#{logged.login}</b>! #{msg['message.sufix']}
                                 </h1>
                                 <hr/>
                                 <h3 class="lighter smaller">
-                                    Contate o administrador para verificar seu perfil de acesso
+                                    #{msg['message.admin.contact']}
                                 </h3>
                             </div>
                         </div>

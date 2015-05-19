@@ -57,7 +57,7 @@
                                             <div class="widget-main">
                                                 <h4 class="header blue lighter bigger">
                                                     <i class="icon-coffee green"></i>
-                                                    Preencha suas informações
+                                                    #{msg['fill.info']}
                                                 </h4>
 
                                                 <div class="space-6"></div>
@@ -66,7 +66,7 @@
                                                     <fieldset>
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="text" class="span12" placeholder="Usuário" required="true"
+                                                                <input type="text" class="span12" placeholder="#{msg['user.placeholder']}" required="true"
                                                                        jsf:value="#{loginBean.login}"/>
                                                                 <i class="icon-user"></i>
                                                             </span>
@@ -74,7 +74,7 @@
 
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="password" class="span12" placeholder="Senha" required="true"
+                                                                <input type="password" class="span12" placeholder="#{msg['password.placeholder']}" required="true"
                                                                        jsf:value="#{loginBean.password}"/>
                                                                 <i class="icon-lock"></i>
                                                             </span>
@@ -90,7 +90,7 @@
                                                             <button class="width-35 pull-right btn btn-small btn-primary" 
                                                                     jsf:action="#{loginBean.doLogin()}">
                                                                 <i class="icon-key"></i>
-                                                                Entrar
+                                                                #{msg['login']}
                                                             </button>
                                                         </div>
 
@@ -104,14 +104,14 @@
                                                     <a href="#" onclick="show_box('forgot-box');
                                                             return false;" class="forgot-password-link">
                                                         <i class="icon-arrow-left"></i>
-                                                        Esqueci minha senha
+                                                        #{msg['password.forgot']}
                                                     </a>
                                                 </div>
 
                                                 <div>
                                                     <a href="#" onclick="show_box('signup-box');
                                                             return false;" class="user-signup-link">
-                                                        Quero me cadastrar
+                                                        #{msg['signup']}
                                                         <i class="icon-arrow-right"></i>
                                                     </a>
                                                 </div>
@@ -124,19 +124,19 @@
                                             <div class="widget-main">
                                                 <h4 class="header red lighter bigger">
                                                     <i class="icon-key"></i>
-                                                    Recupeção de senha
+                                                    #{msg['password.retrieve']}
                                                 </h4>
 
                                                 <div class="space-6"></div>
                                                 <p>
-                                                    Insira o seu email para resetar sua senha
+                                                    #{msg['password.retrieve.label']}
                                                 </p>
 
                                                 <form>
                                                     <fieldset>
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="email" class="span12" placeholder="Email" required="tue"/>
+                                                                <input type="email" class="span12" placeholder="#{msg['email.placeholder']}" required="tue"/>
                                                                 <i class="icon-envelope"></i>
                                                             </span>
                                                         </label>
@@ -144,7 +144,7 @@
                                                         <div class="clearfix">
                                                             <button onclick="return false;" class="width-35 pull-right btn btn-small btn-danger">
                                                                 <i class="icon-lightbulb"></i>
-                                                                Recuperar!
+                                                                #{msg['retrieve']}!
                                                             </button>
                                                         </div>
                                                     </fieldset>
@@ -154,7 +154,7 @@
                                             <div class="toolbar center">
                                                 <a href="#" onclick="show_box('login-box');
                                                         return false;" class="back-to-login-link">
-                                                    Voltar para o login
+                                                    #{msg['login.back']}
                                                     <i class="icon-arrow-right"></i>
                                                 </a>
                                             </div>
@@ -166,17 +166,17 @@
                                             <div class="widget-main">
                                                 <h4 class="header green lighter bigger">
                                                     <i class="icon-group blue"></i>
-                                                    Novo Usuario
+                                                    #{msg['new.user']}
                                                 </h4>
 
                                                 <div class="space-6"></div>
-                                                <p> Preencha suas informações: </p>
+                                                <p> #{msg['fill.info']}: </p>
 
                                                 <form jsf:id="form1">
                                                     <fieldset>
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="email" class="span12" placeholder="Email" 
+                                                                <input type="email" class="span12" placeholder="#{msg['email.placeholder']}" 
                                                                        jsf:value="#{loginBean.email}" required="true"/>
                                                                 <i class="icon-envelope"></i>
                                                             </span>
@@ -184,7 +184,7 @@
 
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="text" class="span12" placeholder="Usuário" 
+                                                                <input type="text" class="span12" placeholder="#{msg['user.placeholder']}" 
                                                                        jsf:value="#{loginBean.login}" required="true"
                                                                        jsf:validator="#{usernameValidator.validate}"/>
                                                                 <i class="icon-user"></i>
@@ -193,7 +193,7 @@
 
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="password" class="span12" placeholder="Senha" 
+                                                                <input type="password" class="span12" placeholder="#{msg['password.placeholder']}" 
                                                                        jsf:value="#{loginBean.password}" required="true"
                                                                        jsf:validator="#{samePwdValidator.validateSource}"/>
                                                                 <i class="icon-lock"></i>
@@ -202,7 +202,7 @@
 
                                                         <label>
                                                             <span class="block input-icon input-icon-right">
-                                                                <input type="password" class="span12" placeholder="Confirme a senha" 
+                                                                <input type="password" class="span12" placeholder="#{msg['password.confirm.placeholder']}" 
                                                                        jsf:id="confirmPwd" required="true"
                                                                        jsf:validator="#{samePwdValidator.validateTarget}"/>
                                                                 <i class="icon-lock"></i>
@@ -214,12 +214,12 @@
                                                         <div class="clearfix">
                                                             <button type="reset" class="width-30 pull-left btn btn-small">
                                                                 <i class="icon-refresh"></i>
-                                                                Limpar
+                                                                #{msg['clear']}
                                                             </button>
 
                                                             <button class="width-65 pull-right btn btn-small btn-success"
                                                                     jsf:action="#{loginBean.create()}">
-                                                                Registrar
+                                                                #{msg['register']}
                                                                 <i class="icon-arrow-right icon-on-right"></i>
                                                             </button>
                                                         </div>
@@ -231,7 +231,7 @@
                                                 <a href="#" onclick="show_box('login-box');
                                                         return false;" class="back-to-login-link">
                                                     <i class="icon-arrow-left"></i>
-                                                    Voltar para o login
+                                                    #{msg['login.back']}
                                                 </a>
                                             </div>
                                         </div><!--/widget-body-->
