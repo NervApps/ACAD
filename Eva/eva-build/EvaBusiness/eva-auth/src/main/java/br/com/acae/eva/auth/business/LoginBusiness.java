@@ -43,6 +43,7 @@ public class LoginBusiness {
         return dao.findByLoginEqualAndPasswordEqual(login.toLowerCase(), password.toLowerCase());
     }
     
+    @Transactional
     public void changeProfile(final User user, final Profile newProfile){
         user.setProfile(newProfile);
         dao.save(user);
