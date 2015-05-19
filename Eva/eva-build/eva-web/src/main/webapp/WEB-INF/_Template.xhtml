@@ -40,13 +40,13 @@
                             <ul class="pull-right dropdown-navbar dropdown-menu dropdown-caret dropdown-closer">
                                 <li class="nav-header">
                                     <i class="icon-ok"></i>
-                                    #{msg['menu.metrics']}
+                                    #{msg['metrics']}
                                 </li>
 
                                 <li>
                                     <a href="#">
                                         <div class="clearfix">
-                                            <span class="pull-left">#{msg['menu.metrics.lateProjects']}</span>
+                                            <span class="pull-left">#{msg['metrics.lateProjects']}</span>
                                             <span class="pull-right">4%</span>
                                         </div>
 
@@ -59,7 +59,7 @@
                                 <li>
                                     <a href="#">
                                         <div class="clearfix">
-                                            <span class="pull-left">#{msg['menu.metrics.pendentProjects']}</span>
+                                            <span class="pull-left">#{msg['metrics.pendentProjects']}</span>
                                             <span class="pull-right">15%</span>
                                         </div>
 
@@ -86,7 +86,7 @@
                                 <li>
                                     <a href="#">
                                         <i class="icon-cog"></i>
-                                        #{msg['menu.config']}
+                                        #{msg['config']}
                                     </a>
                                 </li>
 
@@ -95,7 +95,7 @@
                                 <li>
                                     <a jsf:action="#{loginBean.doLogout}">
                                         <i class="icon-off"></i>
-                                        #{msg['menu.logout']}
+                                        #{msg['logout']}
                                     </a>
                                 </li>
                             </form>
@@ -115,21 +115,21 @@
                     <li>
                         <a jsf:action="index?faces-redirect=true">
                             <i class="icon-dollar"></i>
-                            <span class="menu-text"> #{msg['menu.financial']} </span>
+                            <span class="menu-text"> #{msg['financial']} </span>
                         </a>
                     </li>
 
                     <li>
                         <a jsf:action="index?faces-redirect=true">
                             <i class="icon-folder-open-alt"></i>
-                            <span class="menu-text"> #{msg['menu.projects']} </span>
+                            <span class="menu-text"> #{msg['projects']} </span>
                         </a>
                     </li>
 
                     <li>
                         <a jsf:action="index?faces-redirect=true">
                             <i class="icon-user"></i>
-                            <span class="menu-text"> #{msg['menu.resources']} </span>
+                            <span class="menu-text"> #{msg['resources']} </span>
                         </a>
                     </li>
                 </form><!--/.nav-list-->
@@ -152,7 +152,7 @@
                 <div class="nav-search" id="nav-search">
                     <form class="form-search">
                     <span class="input-icon">
-                        <input type="text" placeholder="Search ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
+                        <input type="text" placeholder="#{msg['search.by']} ..." class="input-small nav-search-input" id="nav-search-input" autocomplete="off" />
                         <i class="icon-search nav-search-icon"></i>
                     </span>
                     </form>
