@@ -5,12 +5,19 @@
  */
 package br.com.acae.eva.model;
 
+import br.com.acae.eva.model.enums.ProcessDefinition;
+import br.com.acae.eva.model.enums.State;
 import java.io.Serializable;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
@@ -27,4 +34,20 @@ public class ProcessInstance implements Serializable {
     @Column(name = "PROCESS_INSTANCE_ID")
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Getter @Setter private Integer id;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PROCESS_DEF")
+    @Getter @Setter private ProcessDefinition def;
+    
+    @Enumerated(EnumType.STRING)
+    @Column(name = "PROCESS_STATE")
+    @Getter @Setter private State state;
+    
+    @ManyToOne
+    @JoinColumn(name = "PARENT_PROCESS_INSTANCE_ID", referencedColumnName = "PROCESS_INSTANCE_ID")
+    @Getter @Setter private ProcessInstance parent;
+    
+    @ManyToOne
+    @JoinColumn(name = "PROJECT_ID", referencedColumnName = "PROJECT_ID")
+    @Getter @Setter private Project project;
 }

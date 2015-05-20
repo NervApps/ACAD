@@ -3,12 +3,13 @@
   <persistence-unit name="eva" transaction-type="RESOURCE_LOCAL">
     <non-jta-data-source>eva</non-jta-data-source>
     <class>br.com.acae.eva.model.History</class>
+    <class>br.com.acae.eva.model.Permission</class>
     <class>br.com.acae.eva.model.ProcessInstance</class>
+    <class>br.com.acae.eva.model.Profile</class>
+    <class>br.com.acae.eva.model.Project</class>
     <class>br.com.acae.eva.model.TaskDef</class>
     <class>br.com.acae.eva.model.TaskInstance</class>
     <class>br.com.acae.eva.model.TaskOrder</class>
-    <class>br.com.acae.eva.model.Permission</class>
-    <class>br.com.acae.eva.model.Profile</class>
     <class>br.com.acae.eva.model.User</class>
     <exclude-unlisted-classes>true</exclude-unlisted-classes>
     <properties>
