@@ -37,14 +37,11 @@ public class ProfileService {
     public Response post(@NotNull @QueryParam("name") String name,
                          @NotNull @QueryParam("user") String user) {
         try {
-            final Profile profile = profileBusiness.find(name);
-            if (profile != null) {
-                final User loaded = loginBusiness.get(user);
-                if (loaded != null) {
-                    loginBusiness.changeProfile(loaded, profile);
-                    return Response.status(Status.OK).build();
-                } else
-                    throw new WebApplicationException(Status.NOT_FOUND);
+            final Profile profile = get(name);
+            final User loaded = loginBusiness.get(user);
+            if (loaded != null) {
+                loginBusiness.changeProfile(loaded, profile);
+                return Response.status(Status.OK).build();
             } else
                 throw new WebApplicationException(Status.NOT_FOUND);
         } catch (Exception e) {
