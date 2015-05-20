@@ -29,17 +29,6 @@ public abstract class AutomaticTask implements Task {
     @Inject @KeepHistory protected Event<TaskInstance> keepHistory;
 
     @Override
-    @Transactional
-    public TaskInstance create(final TaskDef def) {
-        TaskInstance instance = new TaskInstance();
-        instance.setState(TaskState.NEW);
-        instance.setTaskDef(def);
-        instance = instanceDAO.save(instance);
-        
-        return updateState(instance, TaskState.TODO);
-    }
-
-    @Override
     public void start(TaskInstance instance) {
         final List<TaskDef> previous = orderDAO.getPrevious(instance.getTaskDef());
         final List pending = instanceDAO.getPendingInProcess(previous, instance.getProcess());

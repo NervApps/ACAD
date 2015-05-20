@@ -10,6 +10,7 @@ import br.com.acae.eva.flow.task.qualifier.Start;
 import br.com.acae.eva.flow.task.AutomaticTask;
 import br.com.acae.eva.flow.task.impl.qualifier.AlocarPorta;
 import br.com.acae.eva.model.TaskInstance;
+import br.com.acae.eva.task.qualifier.Done;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 
@@ -28,5 +29,10 @@ public class AutomaticAllocation extends AutomaticTask {
     @Override
     public void doing(@Observes @Doing @AlocarPorta TaskInstance instance) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    @Override
+    public void done(@Observes @Done @AlocarPorta TaskInstance instance) {
+        super.done(instance);
     }
 }

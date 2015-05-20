@@ -5,7 +5,6 @@
  */
 package br.com.acae.eva.flow.task;
 
-import br.com.acae.eva.model.TaskDef;
 import br.com.acae.eva.model.TaskInstance;
 
 /**
@@ -13,8 +12,6 @@ import br.com.acae.eva.model.TaskInstance;
  * @author Vitor
  */
 public interface Task {
-    
-    TaskInstance create(TaskDef def);
     
     void start(TaskInstance instance);
     

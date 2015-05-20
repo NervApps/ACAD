@@ -13,8 +13,7 @@ import br.com.acae.eva.model.History;
 import br.com.acae.eva.model.TaskInstance;
 import br.com.acae.eva.model.enums.HistoryObjectType;
 import java.util.Date;
-import javax.ejb.Asynchronous;
-import javax.ejb.Stateless;
+import javax.enterprise.context.RequestScoped;
 import javax.enterprise.event.Observes;
 import javax.inject.Inject;
 import org.apache.deltaspike.jpa.api.transaction.Transactional;
@@ -23,17 +22,16 @@ import org.apache.deltaspike.jpa.api.transaction.Transactional;
  *
  * @author Vitor
  */
-@Stateless
+@RequestScoped
 public class HistoryTasksListener {
     
     @Inject private TaskInstanceDAO taskDAO;
     @Inject private HistoryDAO historyDAO;
     @Inject private AuthHosts hosts;
     
-    @Asynchronous @Transactional
+    @Transactional
     public void keepHistory(@Observes @KeepHistory TaskInstance instance) {
         final TaskInstance previous = taskDAO.findBy(instance.getId());
-        
         final History entity = new History();
         entity.setObjectType(HistoryObjectType.TASK_INSTANCE);
         entity.setObjectId(instance.getId());

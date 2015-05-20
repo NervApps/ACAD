@@ -5,6 +5,7 @@
  */
 package br.com.acae.eva.flow.task.listener;
 
+import br.com.acae.eva.flow.task.business.TaskBusiness;
 import br.com.acae.eva.flow.dao.TaskInstanceDAO;
 import br.com.acae.eva.flow.dao.TaskOrderDAO;
 import br.com.acae.eva.flow.task.qualifier.NextTask;
@@ -24,7 +25,7 @@ public class NextTaskListener {
     
     @Inject private TaskOrderDAO orderDAO;
     @Inject private TaskInstanceDAO instanceDAO;
-    @Inject private TaskExecutorDispatcher dispatcher;
+    @Inject private TaskBusiness business;
     
     @Transactional
     public void executeNextTaks(@Observes @NextTask TaskInstance instance) {
@@ -33,7 +34,7 @@ public class NextTaskListener {
             final ProcessInstance process = instance.getProcess();
             final List<TaskDef> pending = instanceDAO.getPendingInProcess(nexts, process);
             if (!pending.isEmpty()) {
-                dispatcher.run(instance);
+                business.run(instance);
             }
         }
     }

@@ -15,7 +15,6 @@ import lombok.Getter;
  * @author Vitor
  */
 public enum TaskState {
-    NEW(true),
     TODO(true), 
     DOING(true),
     DONE(false),
