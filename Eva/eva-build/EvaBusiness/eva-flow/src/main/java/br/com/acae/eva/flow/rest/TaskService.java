@@ -46,9 +46,8 @@ public class TaskService {
     @Inject @StackTrace private Event<Exception> event;
     
     @POST
-    public TaskInstance post(@NotNull @QueryParam("taskName") String taskName,
-                             @NotNull @QueryParam("processId") Long processId,
-                             @QueryParam("user") String user) {
+    public TaskInstance create(@NotNull @QueryParam("taskName") String taskName,
+                               @NotNull @QueryParam("processId") Long processId) {
         
         WebApplicationException ex;
         try {
@@ -73,7 +72,7 @@ public class TaskService {
                                  @NotNull @QueryParam("processId") Long processId,
                                  @QueryParam("user") String user) {
         
-        final TaskInstance instance = post(taskName, processId, user);
+        final TaskInstance instance = create(taskName, processId);
         run(user, instance.getId().toString());
         return Response.ok().build();
     }
@@ -82,8 +81,7 @@ public class TaskService {
     public Response run(@QueryParam("user") String user, 
                         @NotNull @QueryParam("taskId") String taskId) {
         try {
-            final TaskInstance instance = loadTask(taskId);
-            instance.setExecutedBy(loadUser(user));
+            final TaskInstance instance = prepareTask(taskId, user);
             business.run(instance);
             return Response.ok().build();
         } catch (Exception e) {
@@ -96,8 +94,7 @@ public class TaskService {
     public Response execute(@QueryParam("user") String user, 
                             @NotNull @QueryParam("taskId") String taskId) {
         try {
-            final TaskInstance instance = loadTask(taskId);
-            instance.setExecutedBy(loadUser(user));
+            final TaskInstance instance = prepareTask(taskId, user);
             business.execute(instance);
             return Response.ok().build();
         } catch (Exception e) {
@@ -105,6 +102,25 @@ public class TaskService {
             throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
         }
     }
+    
+    @GET @Path("/finalize")
+    public Response finalize(@QueryParam("user") String user, 
+                             @NotNull @QueryParam("taskId") String taskId) {
+        try {
+            final TaskInstance instance = prepareTask(taskId, user);
+            business.finalize(instance);
+            return Response.ok().build();
+        } catch (Exception e) {
+            event.fire(e);
+            throw new WebApplicationException(Status.INTERNAL_SERVER_ERROR);
+        }
+    }
+    
+    private TaskInstance prepareTask(final String taskId, final String user) {
+        final TaskInstance instance = loadTask(taskId);
+        instance.setExecutedBy(loadUser(user));
+        return instance;
+    } 
     
     private TaskInstance loadTask(final String taskId) {
         final TaskInstance find = business.find(Long.parseLong(taskId));
@@ -127,7 +143,6 @@ public class TaskService {
                 throw new WebApplicationException(Status.NOT_FOUND);
             }
         }
-        
         return user;
     }
 }
