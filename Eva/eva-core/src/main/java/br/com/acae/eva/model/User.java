@@ -44,11 +44,8 @@ public class User implements Serializable {
     @JoinColumn(name = "PROFILE_ID", referencedColumnName = "PROFILE_ID")
     @Getter @Setter private Profile profile;
     
-    public void toLowerCaseLoginAndPassword() {
+    public void toLowerCaseLogin() {
         if (login != null)
             this.login = login.toLowerCase();
-        
-        if (password != null)
-            this.password = password.toLowerCase();
     }
 }

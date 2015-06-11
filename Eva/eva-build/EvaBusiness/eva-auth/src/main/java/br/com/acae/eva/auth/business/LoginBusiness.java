@@ -26,7 +26,7 @@ public class LoginBusiness {
         if (exists(user.getLogin())) {
             throw new BusinessException("User already exists");
         } else {
-            user.toLowerCaseLoginAndPassword();
+            user.toLowerCaseLogin();
             dao.save(user);
         }
     }
