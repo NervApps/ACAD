@@ -21,6 +21,8 @@
         <jodatime.version>2.1</jodatime.version>
         <javamelody.version>1.32.1</javamelody.version>
         <lombok.version>1.14.8</lombok.version>
+        <primefaces.version>5.2</primefaces.version>
+        <spark.version>1.3</spark.version>
     </properties>
     
     <dependencies>

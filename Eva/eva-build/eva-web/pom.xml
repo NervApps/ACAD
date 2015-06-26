@@ -27,6 +27,18 @@
             <version>${deltaspike.version}</version>
             <scope>runtime</scope>
         </dependency>
+        <dependency>  
+            <groupId>org.primefaces.themes</groupId>  
+            <artifactId>spark</artifactId>  
+            <version>${spark.version}</version>  
+            <scope>provided</scope>
+        </dependency> 
+        <dependency>  
+            <groupId>org.primefaces</groupId>  
+            <artifactId>primefaces</artifactId>  
+            <version>${primefaces.version}</version>  
+            <scope>provided</scope>
+        </dependency> 
     </dependencies>
     
 </project>
