@@ -12,7 +12,7 @@
             <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
             <meta name="apple-mobile-web-app-capable" content="yes" />
         </f:facet>
-        <title>PrimeFaces Spark</title>
+        <title>Eva</title>
         <h:outputScript name="js/layout.js" library="spark-layout" />
         
         <h:outputText value="&lt;!--[if gte IE 9]&gt;" escape="false" />
@@ -42,11 +42,12 @@
                         <p:selectBooleanCheckbox value="accept" itemLabel="Eu aceito os termos"/>
                     </div>
                     <div class="EmptyBox30"></div>
-                    <p:button  value="#{msg['login']}" styleClass="Fs16"></p:button>
+                    <p:button  value="Log In / Sign Up" styleClass="Fs16" href="dashboard.xhtml"></p:button>
                     <div class="EmptyBox10"></div>
                     <div class="Seperator"></div>
                     <div class="EmptyBox10"></div>
-                    <p:button  value="#{msg['password.forgot']}" styleClass="Fs16 RedButton"></p:button>
+                    <p:button  value="Forgot Password ?" styleClass="Fs16 RedButton" href="dashboard.xhtml"></p:button>
+                    <p:button  value="Contact Admin ?" styleClass="Fs16 OrangeButton" href="dashboard.xhtml"></p:button>
                     <div class="EmptyBox50"></div>
                 </div>
             </div>
