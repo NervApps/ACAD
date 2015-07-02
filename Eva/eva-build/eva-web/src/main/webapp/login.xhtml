@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:p="http://primefaces.org/ui">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
 
     <h:head>
         <f:facet name="first">
@@ -29,27 +29,28 @@
         <div id="layout-portlets-cover">
             <div class="other-pages-box Container40 Responsive50 MarAuto Fnone TexAlCenter ShadowGray MarTop10"
                  style="margin-top:5%; background-image:url(/spark/resources/spark-layout/images/loginpageillust.svg); background-repeat:no-repeat; background-position:center; background-size:cover;">
-                <div class="Container90 Fnone MarAuto TexAlCenter">
+                <h:form class="Container90 Fnone MarAuto TexAlCenter">
                     <div class="EmptyBox50"></div>
                     <h:graphicImage name="images/LOGO.svg" library="spark-layout" styleClass="MarAuto MarTop20 MarBot10"/>
                     <div class="EmptyBox20"></div>
-                    <p:inputText value="" placeholder="Username" styleClass="Container80 Fnone MarAuto Fs18"/>
+                    <p:inputText placeholder="#{msg['user']}" 
+                                 styleClass="Container80 Fnone MarAuto Fs18"
+                                 value="#{loginBean.login}"
+                                 required="true" requiredMessage="#{msg['login.required']}"/>
                     <div class="EmptyBox10"></div>
-                    <p:password value="" placeholder="Password" styleClass="Container80 Fnone MarAuto Fs18" feedback="false"/>
-                    <div class="EmptyBox20"></div>
-                    <div class="Container85 Fnone MarAuto softgray">
-                        <div class="EmptyBox5"></div>
-                        <p:selectBooleanCheckbox value="accept" itemLabel="Eu aceito os termos"/>
-                    </div>
+                    <p:password placeholder="#{msg['password']}" 
+                                styleClass="Container80 Fnone MarAuto Fs18" feedback="false"
+                                value="#{loginBean.password}"
+                                required="true" requiredMessage="#{msg['password.required']}"/>
                     <div class="EmptyBox30"></div>
-                    <p:button  value="Log In / Sign Up" styleClass="Fs16" href="dashboard.xhtml"></p:button>
-                    <div class="EmptyBox10"></div>
+                    <p:messages/>
                     <div class="Seperator"></div>
+                    <p:commandButton value="#{msg['login']}" styleClass="Fs16"
+                                     action="#{loginBean.doLogin()}"
+                                     update="@form"/>
+                    <p:button value="#{msg['password.forgot']}" styleClass="Fs16 RedButton" href="index.xhtml"></p:button>
                     <div class="EmptyBox10"></div>
-                    <p:button  value="Forgot Password ?" styleClass="Fs16 RedButton" href="dashboard.xhtml"></p:button>
-                    <p:button  value="Contact Admin ?" styleClass="Fs16 OrangeButton" href="dashboard.xhtml"></p:button>
-                    <div class="EmptyBox50"></div>
-                </div>
+                </h:form>
             </div>
         </div>
         

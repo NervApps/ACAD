@@ -30,14 +30,12 @@
         <dependency>  
             <groupId>org.primefaces.themes</groupId>  
             <artifactId>spark</artifactId>  
-            <version>${spark.version}</version>  
-            <scope>provided</scope>
+            <version>${spark.version}</version>
         </dependency> 
         <dependency>  
             <groupId>org.primefaces</groupId>  
             <artifactId>primefaces</artifactId>  
-            <version>${primefaces.version}</version>  
-            <scope>provided</scope>
+            <version>${primefaces.version}</version>
         </dependency> 
     </dependencies>
     

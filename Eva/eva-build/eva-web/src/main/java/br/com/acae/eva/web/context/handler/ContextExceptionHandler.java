@@ -5,10 +5,10 @@
  */
 package br.com.acae.eva.web.context.handler;
 
-import br.com.acae.eva.web.util.Message;
-import br.com.acae.eva.web.util.MessageType;
 import javax.enterprise.event.Observes;
 import javax.faces.FacesException;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 
 /**
  *
@@ -24,10 +24,17 @@ public abstract class ContextExceptionHandler {
         }
         
         if (cause != null) {
-            final String title = getTranslateMessage(cause);
-            final Message msg = new Message(MessageType.ERROR, title);
-            msg.show();
+            final String message = getTranslateMessage(cause);
+            putInContext(message);
         }
+    }
+    
+    private void putInContext(final String message) {
+        final FacesMessage msg = new FacesMessage(message);
+        msg.setSeverity(FacesMessage.SEVERITY_ERROR);
+        
+        final FacesContext ctx = FacesContext.getCurrentInstance();
+        ctx.addMessage(null, msg);
     }
     
     protected abstract Class<? extends Throwable> type();
